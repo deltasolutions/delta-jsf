@@ -1,0 +1,67 @@
+@mixin reset {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: Arial;
+}
+
+@mixin error {
+  > .error {
+    margin-top: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    color: red;
+
+    div + div {
+      margin-top: 0.2rem;
+    }
+  }
+}
+
+.djsf-primitive {
+  @include reset;
+  @include error;
+
+  > .title {
+    margin-bottom: 0.2rem;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  > .content {
+    > input,
+    > select {
+      @include reset;
+      width: 250px;
+      height: 2.2rem;
+      line-height: 2.2rem;
+      padding: 0 0.5rem;
+    }
+  }
+
+  & + & {
+    margin-top: 1rem;
+  }
+}
+
+.djsf-object {
+  @include reset;
+  @include error;
+
+  > .title {
+    margin-bottom: 0.7rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  > .content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.djsf-panic {
+  @include reset;
+  color: red;
+}
