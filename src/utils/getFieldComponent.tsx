@@ -9,9 +9,7 @@ export const getFieldComponent = (
     fields,
     templates: { PanicTemplate }
   } = registry;
-  const Unknown = () => (
-    <PanicTemplate {...props}>Unknown field.</PanicTemplate>
-  );
+  const Unknown = () => <PanicTemplate {...props}>Unknown field</PanicTemplate>;
   if (layout?.field) {
     return fields[layout.field] ?? Unknown;
   }

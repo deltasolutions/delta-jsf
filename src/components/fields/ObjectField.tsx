@@ -76,7 +76,7 @@ export const ObjectField = (props: FieldProps) => {
         if (typeof sub.schema !== 'object') {
           return (
             <PanicTemplate {...sub}>
-              Object properties must be a valid JSONSchema.
+              Object properties must be a valid JSONSchema
             </PanicTemplate>
           );
         }

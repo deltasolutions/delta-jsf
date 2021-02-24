@@ -20,7 +20,7 @@ export const InputField = (props: FieldProps) => {
     }[schema.type];
 
   if (!type) {
-    return <PanicTemplate {...props}>Invalid schema type.</PanicTemplate>;
+    return <PanicTemplate {...props}>Invalid schema type</PanicTemplate>;
   }
 
   return (

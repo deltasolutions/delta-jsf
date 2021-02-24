@@ -15,17 +15,13 @@ export const SelectField = (props: FieldProps) => {
 
   if (type !== 'string') {
     return (
-      <PanicTemplate {...props}>
-        Select field: type must "string".
-      </PanicTemplate>
+      <PanicTemplate {...props}>Select field: type must "string"</PanicTemplate>
     );
   }
 
   if (!oneOf) {
     return (
-      <PanicTemplate {...props}>
-        Select field: oneOf must be used.
-      </PanicTemplate>
+      <PanicTemplate {...props}>Select field: oneOf must be used</PanicTemplate>
     );
   }
 
@@ -45,14 +41,14 @@ export const SelectField = (props: FieldProps) => {
           if (typeof v !== 'object') {
             return (
               <PanicTemplate {...props}>
-                Select field: oneOf[i] must be object.
+                Select field: oneOf[i] must be object
               </PanicTemplate>
             );
           }
           if (typeof v.const !== 'string') {
             return (
               <PanicTemplate {...props}>
-                Select field: oneOf[i].const must be string.
+                Select field: oneOf[i].const must be string
               </PanicTemplate>
             );
           }
