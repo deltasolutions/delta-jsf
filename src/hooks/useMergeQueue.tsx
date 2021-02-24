@@ -8,7 +8,7 @@ export const useMergeQueue = <T extends unknown>(
 ) => {
   const [head, setHead] = useState<T>(initialValue);
   const lockRef = useRef<unknown>();
-  const push = useCallback(async (maybePromise: T | Promise<T>) => {
+  const queue = useCallback(async (maybePromise: T | Promise<T>) => {
     const { current } = lockRef;
     let replacement;
     const lock = async () => {
@@ -24,5 +24,5 @@ export const useMergeQueue = <T extends unknown>(
   const wait = useCallback(async () => {
     await lockRef.current;
   }, []);
-  return [head, push, wait] as const;
+  return [head, queue, wait] as const;
 };

@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-import { useFormManager } from 'src/hooks';
+import { FormManager } from './FormManager';
 import { FormManagerOptions } from './FormManagerOptions';
 
 export interface ManagedFormProps<T = any> {
   children?: ReactNode | ReactNode[];
-  manager: ReturnType<typeof useFormManager>;
+  manager: FormManager<T>;
 }
 
 export interface UnmanagedFormProps<T = any> extends FormManagerOptions<T> {

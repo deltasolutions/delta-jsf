@@ -11,7 +11,7 @@ const meta: Meta = {
 export default meta;
 
 export const Basic = props => {
-  const manager = useStoryFieldProps(props);
+  const fieldProps = useStoryFieldProps(props);
   return (
     <ObjectField
       schema={{
@@ -34,13 +34,13 @@ export const Basic = props => {
           a: { field: 'select' }
         }
       }}
-      {...manager}
+      {...fieldProps}
     />
   );
 };
 
 export const AllOf = props => {
-  const manager = useStoryFieldProps(props);
+  const fieldProps = useStoryFieldProps(props);
   return (
     <ObjectField
       schema={{
@@ -67,13 +67,13 @@ export const AllOf = props => {
           }
         ]
       }}
-      {...manager}
+      {...fieldProps}
     />
   );
 };
 
 export const If = props => {
-  const manager = useStoryFieldProps(props);
+  const fieldProps = useStoryFieldProps(props);
   return (
     <ObjectField
       schema={{
@@ -103,13 +103,13 @@ export const If = props => {
           }
         }
       }}
-      {...manager}
+      {...fieldProps}
     />
   );
 };
 
 export const MultipleIfs = props => {
-  const manager = useStoryFieldProps(props);
+  const fieldProps = useStoryFieldProps(props);
   return (
     <ObjectField
       schema={{
@@ -163,7 +163,7 @@ export const MultipleIfs = props => {
           }
         ]
       }}
-      {...manager}
+      {...fieldProps}
     />
   );
 };

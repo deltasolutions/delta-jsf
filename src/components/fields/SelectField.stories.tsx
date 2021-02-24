@@ -11,7 +11,7 @@ const meta: Meta = {
 export default meta;
 
 export const Basic = props => {
-  const manager = useStoryFieldProps(props);
+  const fieldProps = useStoryFieldProps(props);
   return (
     <SelectField
       schema={{
@@ -29,7 +29,7 @@ export const Basic = props => {
           }
         ]
       }}
-      {...manager}
+      {...fieldProps}
     />
   );
 };

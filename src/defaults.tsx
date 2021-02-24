@@ -5,9 +5,9 @@ import { InputField, ObjectField, SelectField } from './components';
 const createFieldTemplate = (topClassName: string) => ({
   children,
   schema,
-  error
+  validity: error
 }: TemplateProps) => {
-  const errorMessages = error?.messages ?? [];
+  const errorMessages = error?.errors ?? [];
   return (
     <div className={topClassName}>
       {schema.title && <div className="title">{schema.title}</div>}

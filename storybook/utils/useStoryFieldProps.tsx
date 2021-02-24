@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 import { defaults } from 'src/defaults';
-import { FieldError } from 'src/models';
+import { Validity } from 'src/models';
 
 export const useStoryFieldProps = (props, initialValue = undefined) => {
   const [value, setValue] = useState<any>(initialValue);
-  const [error, setError] = useState<FieldError>({ messages: [] });
+  const [error, setError] = useState<Validity>({ errors: [] });
   const onValue = useCallback(v => {
     setValue(v);
     props?.onValue?.(v);

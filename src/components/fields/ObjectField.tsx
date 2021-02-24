@@ -16,9 +16,9 @@ export const ObjectField = (props: FieldProps) => {
       templates: { ObjectTemplate, PanicTemplate }
     },
     value,
-    error,
+    validity,
     onValue,
-    onError
+    onValidity
   } = props;
 
   const { order } = layout ?? {};
@@ -64,11 +64,11 @@ export const ObjectField = (props: FieldProps) => {
           schema: availables?.[key] as Schema,
           layout: layout?.properties?.[key],
           value: value?.[key],
-          error: error?.properties?.[key],
+          validity: validity?.properties?.[key],
           onValue: v => onValue?.(merge(clone(value), { [key]: v })),
-          onError: e =>
-            onError?.(
-              merge(clone(error), { properties: { [key]: e } }, (a, b, k) =>
+          onValidity: e =>
+            onValidity?.(
+              merge(clone(validity), { properties: { [key]: e } }, (a, b, k) =>
                 k === 'messages' ? b : undefined
               )
             )

@@ -13,9 +13,9 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
   const {
     options: { schema, layout, registry },
     value,
-    error,
+    validity,
     setValue,
-    pushCustomError,
+    extendValidity,
     isValid,
     wait,
     submit,
@@ -27,13 +27,13 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
     layout,
     registry: registry ?? defaults.registry,
     value,
-    error,
+    validity,
     onValue: v => {
       setValue(v);
       validate(v);
     },
-    onError: e => {
-      pushCustomError(e as any);
+    onValidity: e => {
+      extendValidity(e as any);
     }
   };
 

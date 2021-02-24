@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import { Form } from './Form';
 import { formStoryParameters, useStoryFormProps } from 'storybook/utils';
+import { Form } from './Form';
 
 const meta: Meta = {
   title: 'Form',

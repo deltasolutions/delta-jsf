@@ -1,7 +1,7 @@
-import { FieldError } from './FieldError';
 import { Layout } from './Layout';
 import { Registry } from './Registry';
 import { Schema } from './Schema';
+import { Validity } from './Validity';
 
 // tslint:disable:member-ordering
 export interface FormManagerOptions<T = any> {
@@ -9,7 +9,7 @@ export interface FormManagerOptions<T = any> {
   layout?: Layout;
   registry?: Registry;
   onValue?: (value: T) => void;
-  onError?: (error: FieldError) => void;
+  onValidity?: (validation: Validity) => void;
   onSubmit?: (value: T) => void;
   initialValue?: T;
 }

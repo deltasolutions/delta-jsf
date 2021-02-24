@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
-import { FieldError } from 'src/models';
+import { Validity } from 'src/models';
 import { FormManager } from 'src/models/FormManager';
 import { FormManagerOptions } from 'src/models/FormManagerOptions';
 import { clone, get, merge, set } from 'src/utils';
@@ -13,16 +13,16 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
 ): TOptions extends { initialValue: T }
   ? FormManager<T>
   : FormManager<T | undefined> => {
-  const { schema = {}, onValue, onError, onSubmit, initialValue } = options;
+  const { schema = {}, onValue, onValidity, onSubmit, initialValue } = options;
 
   const [value, setValue] = useState(initialValue);
-  const [schemaError, setSchemaError] = useState<FieldError>({});
-  const [customError, pushCustomError, wait] = useMergeQueue<FieldError>({});
+  const [schemaValidity, setSchemaValidity] = useState<Validity>({});
+  const [extensionValidity, extendValidity, wait] = useMergeQueue<Validity>({});
 
-  const error = useMemo(() => merge(clone(schemaError), clone(customError)), [
-    schemaError,
-    customError
-  ]);
+  const validity = useMemo(
+    () => merge(clone(schemaValidity), clone(extensionValidity)),
+    [schemaValidity, extensionValidity]
+  );
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const isValid = useMemo(() => {
@@ -33,11 +33,11 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
         (prev, curr) => prev && check(v[curr]),
         !Array.isArray(v.messages) || v.messages.length < 1
       );
-    return check(error);
-  }, [error]);
+    return check(validity);
+  }, [validity]);
 
   const submit = useCallback(async () => {
-    await wait;
+    await wait();
     // TODO: remove type cast
     onSubmit?.(value as T);
     setIsSubmitted(true);
@@ -60,7 +60,7 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
           set(prev, path, [...existingValue, curr.message]);
           return prev;
         }, {}) ?? {};
-      setSchemaError(e);
+      setSchemaValidity(e);
     };
   }, [schema]);
 
@@ -70,16 +70,16 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
   }, [value]);
 
   useLayoutEffect(() => {
-    onError?.(error);
-  }, [error]);
+    onValidity?.(validity);
+  }, [validity]);
 
   return {
     options,
 
     value,
-    error,
     setValue,
-    pushCustomError,
+    validity,
+    extendValidity,
 
     isValid,
     isSubmitted,

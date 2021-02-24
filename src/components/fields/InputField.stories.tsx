@@ -12,9 +12,9 @@ export default meta;
 
 export const Basic = props => {
   const { type } = props;
-  const manager = useStoryFieldProps(props);
+  const fieldProps = useStoryFieldProps(props);
   return (
-    <InputField schema={{ type, title: 'Primitive field' }} {...manager} />
+    <InputField schema={{ type, title: 'Primitive field' }} {...fieldProps} />
   );
 };
 Basic.args = {

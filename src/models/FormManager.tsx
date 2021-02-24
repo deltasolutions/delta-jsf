@@ -1,15 +1,16 @@
 import { Dispatch, SetStateAction } from 'react';
-import { FieldError } from './FieldError';
 import { FormManagerOptions } from './FormManagerOptions';
+import { Validity } from './Validity';
 
 // tslint:disable:member-ordering
 export interface FormManager<T = any> {
   options: FormManagerOptions<T>;
 
   value: T;
-  error: FieldError;
   setValue: Dispatch<SetStateAction<T>>;
-  pushCustomError: (error: FieldError | Promise<FieldError>) => Promise<void>;
+
+  validity: Validity;
+  extendValidity: (validity: Validity | Promise<Validity>) => Promise<void>;
 
   isValid: boolean;
   isSubmitted: boolean;

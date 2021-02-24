@@ -1,4 +1,4 @@
-export * from './FieldError';
+export * from './Validity';
 export * from './FieldProps';
 export * from './FormManager';
 export * from './FormManagerOptions';
