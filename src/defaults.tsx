@@ -1,6 +1,6 @@
 import React from 'react';
 import { TemplateProps } from 'src/models';
-import { InputField, ObjectField, SelectField } from './components';
+import { ArrayField, InputField, ObjectField, SelectField } from './components';
 
 const createFieldTemplate = (topClassName: string) => ({
   children,
@@ -23,6 +23,65 @@ const createFieldTemplate = (topClassName: string) => ({
   );
 };
 
+const ArrayFieldTemplate = ({
+  children,
+  schema,
+  validity: error,
+  value: values,
+  onValue
+}: TemplateProps) => {
+  const { additionalItems, maxItems, minItems } = schema ?? {};
+  const hasDeleteBtn = (values?.length ?? 0) > (minItems ?? 0);
+  const hasAddBtn =
+    (values?.length ?? 0) < (maxItems ?? Infinity) && !!additionalItems;
+  const errorMessages = error?.errors ?? [];
+  return (
+    <div className="djsf-array">
+      {schema.title && <div className="title">{schema.title}</div>}
+      {hasAddBtn && (
+        <button
+          onClick={() => onValue?.(v => [...v, null])}
+          className="add-btn"
+        >
+          add
+        </button>
+      )}
+      <div className="content">
+        {Array.isArray(children) ? (
+          [...children]?.map((child, index) => (
+            <div className="wrap" key={`array-wrap-${index ** 2}`}>
+              {child}
+              {hasDeleteBtn && (
+                <button
+                  onClick={() =>
+                    onValue?.(v => v?.filter((d, i) => i !== index))
+                  }
+                >
+                  delete
+                </button>
+              )}
+            </div>
+          ))
+        ) : (
+          <>
+            {children}
+            {hasDeleteBtn && (
+              <button onClick={() => onValue?.([])}>delete</button>
+            )}
+          </>
+        )}
+      </div>
+      {errorMessages.length > 0 && (
+        <div className="error">
+          {errorMessages.map(e => (
+            <div key={e}>{e}</div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const defaults = {
   registry: {
     fields: {
@@ -30,7 +89,8 @@ export const defaults = {
       number: InputField,
       integer: InputField,
       select: SelectField,
-      object: ObjectField
+      object: ObjectField,
+      array: ArrayField
     },
     templates: {
       PanicTemplate: ({ schema, children }: TemplateProps) => (
@@ -42,7 +102,8 @@ export const defaults = {
         </div>
       ),
       PrimitiveTemplate: createFieldTemplate('djsf-primitive'),
-      ObjectTemplate: createFieldTemplate('djsf-object')
+      ObjectTemplate: createFieldTemplate('djsf-object'),
+      ArrayTemplate: ArrayFieldTemplate
     }
   }
 };

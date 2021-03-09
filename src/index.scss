@@ -61,6 +61,33 @@
   }
 }
 
+.djsf-array {
+  @include reset;
+  @include error;
+
+  > .title {
+    margin-bottom: 0.7rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  > .add-btn {
+    margin-bottom: 0.7rem;
+  }
+
+  > .content {
+    display: flex;
+    flex-direction: column;
+    > .wrap {
+      display: flex;
+      margin-bottom: 0.7rem;
+      > * {
+        margin-right: 0.7rem;
+      }
+    }
+  }
+}
+
 .djsf-panic {
   @include reset;
   color: red;
