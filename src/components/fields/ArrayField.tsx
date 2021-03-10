@@ -9,7 +9,7 @@ export const ArrayField = (props: FieldProps) => {
     registry: {
       templates: { ArrayTemplate, PanicTemplate }
     },
-    value,
+    value: fieldValues,
     validity,
     onValue,
     onValidity
@@ -20,21 +20,20 @@ export const ArrayField = (props: FieldProps) => {
   if (Array.isArray(items)) {
     return (
       <PanicTemplate {...props}>
-        Can`t set property 'items' an array
+        Uncorrect value in 'schema.items'. Must be a object.
       </PanicTemplate>
     );
   }
 
-  const values = Array.isArray(value) && !!value ? value : [];
+  const values = Array.isArray(fieldValues) ? fieldValues : [];
 
   return (
     <ArrayTemplate {...props}>
       {values?.map((value, index) => {
-        const sub = {
-          index,
+        const sub: FieldProps<any> = {
           ...props,
           schema: (items ?? {}) as Schema,
-          layout,
+          layout: layout?.items,
           value,
           onValue: v => {
             const copy = [...values];
