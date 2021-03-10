@@ -2,13 +2,6 @@ import React from 'react';
 import { FieldProps, Schema } from 'src/models';
 import { clone, getFieldComponent, merge } from 'src/utils';
 
-//     items?: JSONSchema7Definition | JSONSchema7Definition[];
-//     additionalItems?: JSONSchema7Definition;
-//     maxItems?: number;
-//     minItems?: number;
-//     uniqueItems?: boolean;
-//     contains?: JSONSchema7;
-
 export const ArrayField = (props: FieldProps) => {
   const {
     schema,
@@ -16,7 +9,7 @@ export const ArrayField = (props: FieldProps) => {
     registry: {
       templates: { ArrayTemplate, PanicTemplate }
     },
-    value: values,
+    value,
     validity,
     onValue,
     onValidity
@@ -32,6 +25,8 @@ export const ArrayField = (props: FieldProps) => {
     );
   }
 
+  const values = Array.isArray(value) && !!value ? value : [];
+
   return (
     <ArrayTemplate {...props}>
       {values?.map((value, index) => {
@@ -40,24 +35,25 @@ export const ArrayField = (props: FieldProps) => {
           ...props,
           schema: (items ?? {}) as Schema,
           layout,
-          validity,
           value,
           onValue: v => {
             const copy = [...values];
             copy[index] = v;
             onValue?.(copy);
           },
+          validity: validity?.items?.[index],
           onValidity: e => {
-            // onValidity?.(
-            //   merge(
-            //     clone(validity),
-            //     { properties: { [index]: e } },
-            //     (a, b, k) => (k === 'messages' ? b : undefined)
-            //   )
-            // );
+            const items = new Array(values.length).fill(null);
+            if (values.length - 1 >= index) {
+              items[index] = e;
+            }
+            onValidity?.(
+              merge(clone(validity), { items }, (a, b, k) =>
+                k === 'messages' ? b : undefined
+              )
+            );
           }
         };
-
         if (typeof sub.schema !== 'object') {
           return (
             <PanicTemplate {...sub}>

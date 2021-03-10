@@ -1,24 +1,30 @@
-import React from 'react';
-import { TemplateProps } from 'src/models';
+import React, { Fragment, ReactNode } from 'react';
+import { TemplateProps, Validity } from 'src/models';
 import { ArrayField, InputField, ObjectField, SelectField } from './components';
+
+const showErrors = (validity?: Validity): ReactNode => {
+  const errors = validity?.errors ?? [];
+  return (
+    errors.length > 0 && (
+      <div className="error">
+        {errors.map(e => (
+          <div key={e}>{e}</div>
+        ))}
+      </div>
+    )
+  );
+};
 
 const createFieldTemplate = (topClassName: string) => ({
   children,
   schema,
-  validity: error
+  validity
 }: TemplateProps) => {
-  const errorMessages = error?.errors ?? [];
   return (
     <div className={topClassName}>
       {schema.title && <div className="title">{schema.title}</div>}
       <div className="content">{children}</div>
-      {errorMessages.length > 0 && (
-        <div className="error">
-          {errorMessages.map(e => (
-            <div key={e}>{e}</div>
-          ))}
-        </div>
-      )}
+      {showErrors(validity)}
     </div>
   );
 };
@@ -26,58 +32,40 @@ const createFieldTemplate = (topClassName: string) => ({
 const ArrayFieldTemplate = ({
   children,
   schema,
-  validity: error,
+  validity,
   value: values,
   onValue
 }: TemplateProps) => {
   const { additionalItems, maxItems, minItems } = schema ?? {};
+
   const hasDeleteBtn = (values?.length ?? 0) > (minItems ?? 0);
+  const handleDelete = (itemIdex: number) =>
+    onValue?.(v => v?.filter((d, i) => i !== itemIdex));
+
   const hasAddBtn =
     (values?.length ?? 0) < (maxItems ?? Infinity) && !!additionalItems;
-  const errorMessages = error?.errors ?? [];
+  const handleAdd = () => onValue?.(v => [...v, null]);
+
   return (
     <div className="djsf-array">
       {schema.title && <div className="title">{schema.title}</div>}
-      {hasAddBtn && (
-        <button
-          onClick={() => onValue?.(v => [...v, null])}
-          className="add-btn"
-        >
-          add
-        </button>
-      )}
+      {hasAddBtn && <button onClick={handleAdd}>add</button>}
       <div className="content">
-        {Array.isArray(children) ? (
-          [...children]?.map((child, index) => (
-            <div className="wrap" key={`array-wrap-${index ** 2}`}>
-              {child}
-              {hasDeleteBtn && (
-                <button
-                  onClick={() =>
-                    onValue?.(v => v?.filter((d, i) => i !== index))
-                  }
-                >
-                  delete
-                </button>
-              )}
-            </div>
-          ))
-        ) : (
-          <>
-            {children}
-            {hasDeleteBtn && (
-              <button onClick={() => onValue?.([])}>delete</button>
-            )}
-          </>
-        )}
+        {Array.isArray(children)
+          ? [...children]?.map((child, index) => (
+              <Fragment key={`array-wrap-${index ** 2}`}>
+                <div className="wrap">
+                  {child}
+                  {hasDeleteBtn && (
+                    <button onClick={() => handleDelete(index)}>delete</button>
+                  )}
+                </div>
+                {showErrors(validity?.items?.[index])}
+              </Fragment>
+            ))
+          : children}
+        {showErrors(validity)}
       </div>
-      {errorMessages.length > 0 && (
-        <div className="error">
-          {errorMessages.map(e => (
-            <div key={e}>{e}</div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

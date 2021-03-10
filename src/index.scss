@@ -65,14 +65,13 @@
   @include reset;
   @include error;
 
-  > .title {
+  > * {
     margin-bottom: 0.7rem;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.5);
   }
 
-  > .add-btn {
-    margin-bottom: 0.7rem;
+  > .title {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
   }
 
   > .content {
