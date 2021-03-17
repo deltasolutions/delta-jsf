@@ -5,8 +5,8 @@ import { FormManagerOptions } from 'src/models';
 
 export const useStoryFormProps = <T extends unknown>(
   options: FormManagerOptions<T>
-): FormProps<T> => {
-  const manager = useFormManager({
+): FormProps<T | undefined> => {
+  const manager = useFormManager<T, FormManagerOptions<T>>({
     ...options,
     registry: defaults.registry
   });
