@@ -20,7 +20,7 @@ export const ArrayField = (props: FieldProps) => {
   if (Array.isArray(items)) {
     return (
       <PanicTemplate {...props}>
-        Uncorrect value in 'schema.items'. Must be a object.
+        Incorrect value in 'schema.items' — must be a object.
       </PanicTemplate>
     );
   }
