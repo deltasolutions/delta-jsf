@@ -17,6 +17,7 @@ export const Basic = props => {
     <InputField schema={{ type, title: 'Primitive field' }} {...fieldProps} />
   );
 };
+
 Basic.args = {
   type: 'string'
 };
