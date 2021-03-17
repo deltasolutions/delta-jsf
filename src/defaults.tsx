@@ -2,7 +2,7 @@ import React, { Fragment, ReactNode } from 'react';
 import { TemplateProps, Validity } from 'src/models';
 import { ArrayField, InputField, ObjectField, SelectField } from './components';
 
-const showErrors = (validity?: Validity): ReactNode => {
+const getErrors = (validity?: Validity): ReactNode => {
   const errors = validity?.errors ?? [];
   return (
     errors.length > 0 && (
@@ -24,7 +24,7 @@ const createFieldTemplate = (topClassName: string) => ({
     <div className={topClassName}>
       {schema.title && <div className="title">{schema.title}</div>}
       <div className="content">{children}</div>
-      {showErrors(validity)}
+      {getErrors(validity)}
     </div>
   );
 };
@@ -60,11 +60,11 @@ const ArrayFieldTemplate = ({
                     <button onClick={() => handleDelete(index)}>delete</button>
                   )}
                 </div>
-                {showErrors(validity?.items?.[index])}
+                {getErrors(validity?.items?.[index])}
               </Fragment>
             ))
           : children}
-        {showErrors(validity)}
+        {getErrors(validity)}
       </div>
     </div>
   );
