@@ -41,7 +41,6 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
 
   return (
     <form
-      noValidate
       onSubmit={async e => {
         e.preventDefault();
         await wait();

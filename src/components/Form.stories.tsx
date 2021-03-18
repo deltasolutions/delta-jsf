@@ -13,6 +13,7 @@ export default meta;
 export const Basic = props => {
   const formProps = useStoryFormProps({
     ...props,
+    onSubmit: values => console.log(values),
     schema: {
       type: 'object',
       title: 'Form',
@@ -21,7 +22,7 @@ export const Basic = props => {
           type: 'object',
           properties: {
             a: {
-              type: 'number',
+              type: 'integer',
               title: 'AAA',
               maximum: 5
             }

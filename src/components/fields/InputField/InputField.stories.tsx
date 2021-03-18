@@ -21,6 +21,7 @@ export const Basic = props => {
 Basic.args = {
   type: 'string'
 };
+
 Basic.argTypes = {
   type: {
     control: {
