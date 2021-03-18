@@ -69,7 +69,7 @@ export const ObjectField = (props: FieldProps) => {
           onValidity: e =>
             onValidity?.(
               merge(clone(validity), { properties: { [key]: e } }, (a, b, k) =>
-                k === 'messages' ? b : undefined
+                k === 'errors' ? b : undefined
               )
             )
         };

@@ -48,7 +48,7 @@ export const ArrayField = (props: FieldProps) => {
             }
             onValidity?.(
               merge(clone(validity), { items }, (a, b, k) =>
-                k === 'messages' ? b : undefined
+                k === 'errors' ? b : undefined
               )
             );
           }

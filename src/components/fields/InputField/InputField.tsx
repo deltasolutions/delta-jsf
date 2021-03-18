@@ -29,8 +29,6 @@ export const InputField = (props: FieldProps) => {
       ? 1
       : schema.multipleOf;
 
-  console.log(value);
-
   return (
     <PrimitiveTemplate {...props}>
       <input
