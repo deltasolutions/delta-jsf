@@ -1,20 +1,17 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { useStoryFieldProps } from 'storybook/utils';
-import { InputField } from './InputField';
+import { Basic, Filled } from './InputField.stories';
 
-const TestComponent = props => {
-  const { type } = props;
-  const fieldProps = useStoryFieldProps(props);
-  return (
-    <InputField schema={{ type, title: 'Primitive field' }} {...fieldProps} />
-  );
-};
+test('InputField init value test', () => {
+  const withoutDefaultValue = shallow(<Basic type="string" />);
+  expect(withoutDefaultValue.prop('value')).toBe(undefined);
 
-test('InputField type=text changes', () => {
-  const component = shallow(<TestComponent type="string" />);
+  const hasDefaultValue = shallow(<Filled type="string" />);
+  expect(hasDefaultValue.prop('value')).toBe('lorem');
+});
 
-  expect(component.prop('value')).toBe(undefined);
+test('InputField type=text change', () => {
+  const component = shallow(<Basic type="string" />);
 
   component
     .dive()
@@ -25,10 +22,8 @@ test('InputField type=text changes', () => {
   expect(component.prop('value')).toBe('Test-42');
 });
 
-test('InputField type=number changes', () => {
-  const component = shallow(<TestComponent type="number" />);
-
-  expect(component.prop('value')).toBe(undefined);
+test('InputField type=number change', () => {
+  const component = shallow(<Basic type="number" />);
 
   component
     .dive()
@@ -36,8 +31,7 @@ test('InputField type=number changes', () => {
     .at(0)
     .simulate('change', { target: { value: 'Tpscrt-42' } });
 
-  console.log(component.props());
-  expect(component.prop('value')).toBe(-42);
+  expect(component.prop('value')).toBeNaN();
 
   component
     .dive()
@@ -48,18 +42,14 @@ test('InputField type=number changes', () => {
   expect(component.prop('value')).toBe(42);
 });
 
-test('InputField type=integer check html attr', () => {
-  const component = shallow(<TestComponent type="integer" />);
-
-  expect(component.prop('value')).toBe(undefined);
+test('InputField type=integer check step attr', () => {
+  const component = shallow(<Basic type="integer" />);
 
   expect(!!component.dive().find('input').at(0).prop('step')).toBe(true);
 });
 
 test('InputField type=wrong', () => {
-  const component = shallow(<TestComponent type="wrong" />);
-
-  expect(component.prop('value')).toBe(undefined);
+  const component = shallow(<Basic type="wrong" />);
 
   expect(component.dive().find('input').exists()).toBe(false);
 });

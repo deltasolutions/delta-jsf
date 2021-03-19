@@ -11,7 +11,7 @@ const meta: Meta = {
 export default meta;
 
 export const Basic = props => {
-  const { type } = props;
+  const { type, initValue } = props;
   const fieldProps = useStoryFieldProps(props);
   return (
     <InputField schema={{ type, title: 'Primitive field' }} {...fieldProps} />
@@ -29,4 +29,14 @@ Basic.argTypes = {
       options: ['string', 'number', 'integer', 'wrong']
     }
   }
+};
+
+export const Filled = props => {
+  const fieldProps = useStoryFieldProps(props, 'lorem');
+  return (
+    <InputField
+      schema={{ type: 'string', title: 'With init value' }}
+      {...fieldProps}
+    />
+  );
 };
