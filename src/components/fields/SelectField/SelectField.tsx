@@ -8,9 +8,11 @@ export const SelectField = (props: FieldProps) => {
     onValue,
     registry: {
       templates: { PrimitiveTemplate, PanicTemplate }
-    }
+    },
+    layout
   } = props;
 
+  const { placeholder } = layout?.options ?? {};
   const { type, oneOf } = schema;
 
   if (type !== 'string') {
@@ -37,6 +39,9 @@ export const SelectField = (props: FieldProps) => {
           onValue?.(v);
         }}
       >
+        <option hidden disabled value="">
+          {placeholder ?? ''}
+        </option>
         {oneOf.map(v => {
           if (typeof v !== 'object') {
             return (

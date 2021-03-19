@@ -29,6 +29,11 @@ export const Basic = props => {
           }
         ]
       }}
+      layout={{
+        options: {
+          placeholder: 'select an option'
+        }
+      }}
       {...fieldProps}
     />
   );

@@ -31,6 +31,44 @@ export const Basic = props => {
       }}
       layout={{
         properties: {
+          a: { field: 'select', options: { placeholder: 'select an option' } }
+        }
+      }}
+      {...fieldProps}
+    />
+  );
+};
+
+export const Filled = props => {
+  const fieldProps = useStoryFieldProps(props, {
+    a: 2,
+    b: 'test-42',
+    c: [42, 24]
+  });
+  return (
+    <ObjectField
+      schema={{
+        type: 'object',
+        title: 'Basic object',
+        properties: {
+          a: {
+            title: 'AAA',
+            type: 'string',
+            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }]
+          },
+          b: {
+            title: 'BBB',
+            type: 'string'
+          },
+          c: {
+            title: 'CCC',
+            type: 'array',
+            items: { type: 'string' }
+          }
+        }
+      }}
+      layout={{
+        properties: {
           a: { field: 'select' }
         }
       }}
