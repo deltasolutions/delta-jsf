@@ -40,11 +40,12 @@ const ArrayFieldTemplate = ({
 
   const hasDeleteBtn = (values?.length ?? 0) > (minItems ?? 0);
   const handleDelete = (itemIdex: number) =>
-    onValue?.(v => v?.filter((d, i) => i !== itemIdex));
+    onValue?.(v => v?.filter((d, i) => i !== itemIdex) ?? []);
 
   const hasAddBtn =
     (values?.length ?? 0) < (maxItems ?? Infinity) && !!additionalItems;
-  const handleAdd = () => onValue?.(v => [...v, null]);
+  const handleAdd = () =>
+    onValue?.(v => (Array.isArray(v) ? [...v, null] : [null]));
 
   return (
     <div className="djsf-array">

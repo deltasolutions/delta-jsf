@@ -40,7 +40,7 @@ export const Filled = props => {
     <SelectField
       schema={{
         type: 'string',
-        title: 'Select field',
+        title: 'With init value',
         oneOf: [
           {
             const: '1'
