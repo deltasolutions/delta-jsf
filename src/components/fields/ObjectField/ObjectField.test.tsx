@@ -2,7 +2,7 @@ import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { Basic, Filled, If } from './ObjectField.stories';
 
-test('ObjectField init value test', () => {
+test('init value test', () => {
   const withoutDefaultValue = shallow(<Basic />);
   expect(withoutDefaultValue.prop('value')).toBe(undefined);
 
@@ -14,7 +14,7 @@ test('ObjectField init value test', () => {
   });
 });
 
-test('ObjectField if then', () => {
+test('if then', () => {
   const component = mount(<If />);
 
   expect(component.find('.djsf-primitive')).toHaveLength(2);

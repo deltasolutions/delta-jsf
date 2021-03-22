@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { Basic, Filled } from './InputField.stories';
 
-test('InputField init value test', () => {
+test('init value test', () => {
   const withoutDefaultValue = shallow(<Basic type="string" />);
   expect(withoutDefaultValue.prop('value')).toBe(undefined);
 
@@ -10,7 +10,7 @@ test('InputField init value test', () => {
   expect(hasDefaultValue.prop('value')).toBe('lorem');
 });
 
-test('InputField type=text change', () => {
+test('type=text change', () => {
   const component = shallow(<Basic type="string" />);
 
   component
@@ -22,7 +22,7 @@ test('InputField type=text change', () => {
   expect(component.prop('value')).toBe('Test-42');
 });
 
-test('InputField type=number change', () => {
+test('type=number change', () => {
   const component = shallow(<Basic type="number" />);
 
   component
@@ -42,13 +42,13 @@ test('InputField type=number change', () => {
   expect(component.prop('value')).toBe(42);
 });
 
-test('InputField type=integer check step attr', () => {
+test('type=integer check step attr', () => {
   const component = shallow(<Basic type="integer" />);
 
   expect(!!component.dive().find('input').at(0).prop('step')).toBe(true);
 });
 
-test('InputField type=wrong', () => {
+test('type=wrong', () => {
   const component = shallow(<Basic type="wrong" />);
 
   expect(component.dive().find('input').exists()).toBe(false);

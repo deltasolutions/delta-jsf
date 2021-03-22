@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { Basic, Filled } from './SelectField.stories';
 
-test('SelectField init value test', () => {
+test('init value test', () => {
   const withoutDefaultValue = shallow(<Basic />);
 
   expect(withoutDefaultValue.prop('value')).toBe(undefined);
@@ -12,7 +12,7 @@ test('SelectField init value test', () => {
   expect(hasDefaultValue.prop('value')).toBe('2');
 });
 
-test('SelectField changes', () => {
+test('change', () => {
   const component = shallow(<Basic />);
 
   expect(component.prop('value')).toBe(undefined);
