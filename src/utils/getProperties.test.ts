@@ -1,20 +1,17 @@
 import { Schema } from 'src/models';
-import { getProperties } from './getProperties'
+import { getProperties } from './getProperties';
 
-it('allOf story ', () => {
+it('merge properties from multiple sources', () => {
   const schema: Schema = {
     type: 'object',
     title: 'Object with allOf usage',
+    properties: {
+      a: {
+        title: 'AAA',
+        type: 'string'
+      }
+    },
     allOf: [
-      {
-        type: 'object',
-        properties: {
-          a: {
-            title: 'AAA',
-            type: 'string'
-          }
-        }
-      },
       {
         type: 'object',
         properties: {
@@ -38,21 +35,21 @@ it('allOf story ', () => {
 
   expect(getProperties(schema)).toEqual({
     a: {
-      title: "AAA",
-      type: "string"
+      title: 'AAA',
+      type: 'string'
     },
     b: {
-      title: "BBB",
-      type: "number"
+      title: 'BBB',
+      type: 'number'
     },
     c: {
-      title: "CCC",
-      type: "integer"
+      title: 'CCC',
+      type: 'integer'
     }
   });
 });
 
-it('multiple Ifs story ', () => {
+it('ignore unnecessary', () => {
   const schema: Schema = {
     type: 'object',
     title: 'Object with if usage',
@@ -107,12 +104,12 @@ it('multiple Ifs story ', () => {
 
   expect(getProperties(schema)).toEqual({
     a: {
-      title: "AAA",
-      type: "string"
+      title: 'AAA',
+      type: 'string'
     },
     b: {
-      title: "BBB",
-      type: "number"
+      title: 'BBB',
+      type: 'number'
     }
   });
 });

@@ -1,9 +1,8 @@
 import { Schema } from 'src/models';
-import { getConditionals } from './getConditionals'
+import { getConditionals } from './getConditionals';
 
-const firstTestSchema: Schema = {
+const schemaA: Schema = {
   type: 'object',
-  title: 'Object with if usage',
   properties: {
     a: {
       title: 'AAA',
@@ -29,9 +28,8 @@ const firstTestSchema: Schema = {
   }
 };
 
-const secondTestSchema: Schema = {
+const schemaB: Schema = {
   type: 'object',
-  title: 'Object with if usage',
   allOf: [
     {
       type: 'object',
@@ -94,37 +92,43 @@ const secondTestSchema: Schema = {
           e: { type: 'string', title: 'EEE' }
         }
       }
-    },
+    }
   ]
 };
 
-
-describe('one if', () => {
-  it('without value', () => {
-    expect(getConditionals(firstTestSchema, undefined)).toEqual({});
+describe('single if', () => {
+  it('handle undefined value', () => {
+    expect(getConditionals(schemaA, undefined)).toEqual({});
   });
-  it('with expected value', () => {
-    expect(getConditionals(firstTestSchema, { b: 3 })).toEqual({});
+  it('handle empty result', () => {
+    expect(getConditionals(schemaA, { b: 3 })).toEqual({});
   });
-  it('with expected value', () => {
-    expect(getConditionals(firstTestSchema, { b: 5 })).toEqual({ c: { type: 'string', title: 'CCC' } });
+  it('get valid conditionals', () => {
+    expect(getConditionals(schemaA, { b: 5 })).toEqual({
+      c: { type: 'string', title: 'CCC' }
+    });
   });
 });
-describe('multiple Ifs', () => {
-  it('without value', () => {
-    expect(getConditionals(secondTestSchema, undefined)).toEqual({});
+
+describe('multiple ifs', () => {
+  it('handle undefined value', () => {
+    expect(getConditionals(schemaB, undefined)).toEqual({});
   });
-  it('value not match the conditions', () => {
-    expect(getConditionals(secondTestSchema, { b: 3 })).toEqual({});
+  it('handle empty result', () => {
+    expect(getConditionals(schemaB, { b: 3 })).toEqual({});
   });
-  it('match the conditions 1', () => {
-    expect(getConditionals(secondTestSchema, { b: 5 })).toEqual({ c: { type: 'number', title: 'CCC' } });
+  it('get valid conditionals #1', () => {
+    expect(getConditionals(schemaB, { b: 5 })).toEqual({
+      c: { type: 'number', title: 'CCC' }
+    });
   });
-  it('match the conditions 2', () => {
-    expect(getConditionals(secondTestSchema, { b: 42 })).toEqual({ e: { type: 'string', title: 'EEE' } });
+  it('get valid conditionals #2', () => {
+    expect(getConditionals(schemaB, { b: 42 })).toEqual({
+      e: { type: 'string', title: 'EEE' }
+    });
   });
-  it('match the conditions 3', () => {
-    expect(getConditionals(secondTestSchema, { b: 5, c: 5 })).toEqual({
+  it('get valid conditionals #3', () => {
+    expect(getConditionals(schemaB, { b: 5, c: 5 })).toEqual({
       c: { type: 'number', title: 'CCC' },
       d: { type: 'string', title: 'DDD' }
     });
