@@ -29,6 +29,35 @@ export const Basic = props => {
           }
         ]
       }}
+      layout={{
+        options: {
+          placeholder: 'select an option'
+        }
+      }}
+      {...fieldProps}
+    />
+  );
+};
+
+export const Filled = props => {
+  const fieldProps = useStoryFieldProps(props, '2');
+  return (
+    <SelectField
+      schema={{
+        type: 'string',
+        title: 'With init value',
+        oneOf: [
+          {
+            const: '1'
+          },
+          {
+            const: '2'
+          },
+          {
+            const: '3'
+          }
+        ]
+      }}
       {...fieldProps}
     />
   );

@@ -3,7 +3,7 @@
     "exclude": ["build/**/*", "node_modules/**/*"]
   },
   "rules": {
-    "import-blacklist": [true, "lodash", "styled-components", "~lib/dtos"],
+    "import-blacklist": [true, "lodash", "styled-components"],
     "interface-name": [true, "never-prefix"],
     "member-ordering": [
       true,

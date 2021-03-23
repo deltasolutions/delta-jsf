@@ -31,7 +31,7 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
       typeof v !== 'object' ||
       Object.keys(v).reduce(
         (prev, curr) => prev && check(v[curr]),
-        !Array.isArray(v.messages) || v.messages.length < 1
+        !Array.isArray(v.errors) || v.errors.length < 1
       );
     return check(validity);
   }, [validity]);
@@ -55,7 +55,7 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
             .split('/')
             .map(v => v.replace(/~0/g, '~').replace(/~1/g, '/'))
             .slice(1);
-          path.push('messages');
+          path.push('errors');
           const existingValue = get(prev, path) ?? [];
           set(prev, path, [...existingValue, curr.message]);
           return prev;

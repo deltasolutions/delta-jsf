@@ -1,10 +1,6 @@
 import { FormProps, ManagedFormProps } from 'src/models';
 
-export const isString = (v): v is string => typeof v === 'string';
-
 export const isObject = (v): v is object => typeof v === 'object' && v;
-
-export const isFunction = (v): v is Function => typeof v === 'function';
 
 export const isPromise = <T extends unknown>(v): v is Promise<T> =>
   v instanceof Promise;

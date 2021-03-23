@@ -39,10 +39,6 @@
       padding: 0 0.5rem;
     }
   }
-
-  & + & {
-    margin-top: 1rem;
-  }
 }
 
 .djsf-object {
@@ -58,6 +54,10 @@
   > .content {
     display: flex;
     flex-direction: column;
+
+    & > *:not(:first-child) {
+      margin-top: 1rem;
+    }
   }
 }
 
@@ -67,11 +67,6 @@
 
   > * {
     margin-bottom: 0.7rem;
-  }
-
-  > .title {
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.5);
   }
 
   > .content {

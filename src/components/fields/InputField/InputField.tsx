@@ -23,14 +23,20 @@ export const InputField = (props: FieldProps) => {
     return <PanicTemplate {...props}>Invalid schema type</PanicTemplate>;
   }
 
+  const step =
+    schema.type === 'integer' &&
+    (!schema.multipleOf || schema.multipleOf % 1 !== 0)
+      ? 1
+      : schema.multipleOf;
+
   return (
     <PrimitiveTemplate {...props}>
       <input
         type={type}
+        step={step}
         value={value ?? ''}
         min={schema.minimum}
         max={schema.maximum}
-        step={schema.multipleOf}
         onChange={e => {
           let v: string | number | undefined = e.target.value;
           if (v === '') {
