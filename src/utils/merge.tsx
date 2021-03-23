@@ -1,6 +1,5 @@
 import { MergeFunction } from 'src/models';
-import { clone } from './clone';
-import { isFunction, isObject } from './guards';
+import { isObject } from './guards';
 
 const mergeTwoObjects = (target: any, source: any, fn?: MergeFunction) => {
   Object.keys(source).forEach((key: string) => {
@@ -21,9 +20,9 @@ const mergeTwoObjects = (target: any, source: any, fn?: MergeFunction) => {
 };
 
 export const merge = (...args: any[]) => {
-  const hasMergeFn = isFunction(args[args.length - 1]);
+  const hasMergeFn = typeof args[args.length - 1] === 'function';
   const fn = hasMergeFn ? (args.pop() as MergeFunction) : undefined;
-  const objects = args.filter(v => v && typeof v === 'object');
+  const objects = args.filter(v => isObject(v));
   if (objects.length < 1) {
     return {};
   }
