@@ -1,4 +1,6 @@
 import { promises as fsp } from 'fs';
+import execa from 'execa';
+import { argv } from 'yargs';
 
 import { task, dest, src, series } from 'gulp';
 import ts from 'gulp-typescript';
@@ -31,3 +33,25 @@ task('build:lib:types', () => {
 });
 
 task('build:lib', series('clean', 'build:lib:js', 'build:lib:types'));
+
+task('release:git', async () => {
+  const version = argv['release-version'];
+  if (!version) {
+    throw new Error(
+      'Specify version: `npm run release -- --release-version <version>`'
+    );
+  }
+  const options = { stdout: 'inherit' };
+  await execa.command(`npm version ${version}`, options);
+  await execa.command(`git commit -am ${version}`, options);
+  await execa.command(`git push origin develop`, options);
+  await execa.command(`git push origin master`, options);
+  await execa.command(`git push origin ${version}`, options);
+});
+
+task('release:npm', async () => {
+  const options = { stdout: 'inherit' };
+  await execa.command(`npm publish`, options);
+});
+
+task('release', series('release:git', 'build:lib', 'release:npm'));
