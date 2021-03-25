@@ -44,7 +44,7 @@ task('release:git', async () => {
   const options = { stdout: 'inherit' };
   await execa.command(`npm version ${version}`, options);
   await execa.command(`git push origin master`, options);
-  await execa.command(`git push origin ${version}`, options);
+  await execa.command(`git push origin v${version}`, options);
 });
 
 task('release:npm', async () => {
