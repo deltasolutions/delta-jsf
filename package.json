@@ -1,6 +1,6 @@
 {
   "name": "delta-jsf",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "license": "MIT",
   "main": "build/index.cjs",
   "module": "build/index.js",
