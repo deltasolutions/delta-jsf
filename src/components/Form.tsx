@@ -1,8 +1,8 @@
+import { defaults } from 'src/defaults';
 import { useFormManager } from 'src/hooks';
 import { FormProps } from 'src/models';
 import { FormManagerOptions } from 'src/models/FormManagerOptions';
 import { areManagedFormProps, getFieldComponent } from 'src/utils';
-import { defaults } from '../defaults';
 
 export const Form = <T extends unknown>(props: FormProps<T>) => {
   const defaultManager = useFormManager(props as FormManagerOptions<T>);
@@ -11,7 +11,7 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
     : defaultManager;
 
   const {
-    options: { schema, layout, registry },
+    options: { schema, layout, registry = defaults.registry },
     value,
     validity,
     setValue,
@@ -25,7 +25,7 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
   const rootFieldProps = {
     schema,
     layout,
-    registry: registry ?? defaults.registry,
+    registry,
     value,
     validity,
     onValue: v => {

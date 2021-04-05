@@ -72,10 +72,12 @@
   > .content {
     display: flex;
     flex-direction: column;
-    > .wrap {
+
+    > .item {
       display: flex;
       margin-bottom: 0.7rem;
-      > * {
+
+      > *:not(:last-child) {
         margin-right: 0.7rem;
       }
     }

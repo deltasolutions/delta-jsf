@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import { defaults } from 'src/defaults';
 import { Validity } from 'src/models';
 import { FormManager } from 'src/models/FormManager';
 import { FormManagerOptions } from 'src/models/FormManagerOptions';
@@ -13,7 +14,17 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
 ): TOptions extends { initialValue: T }
   ? FormManager<T>
   : FormManager<T | undefined> => {
-  const { schema = {}, onValue, onValidity, onSubmit, initialValue } = options;
+  const {
+    initialValue,
+    schema = {},
+    onValue,
+    onValidity,
+    onSubmit,
+    registry = defaults.registry
+  } = options;
+  const {
+    utils: { validateAgainstSchema }
+  } = registry;
 
   const [value, setValue] = useState(initialValue);
   const [schemaValidity, setSchemaValidity] = useState<Validity>({});
@@ -44,25 +55,18 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
     return value;
   }, []);
 
-  const validate = useMemo(() => {
-    const validateViaAjv = ajv.compile<T>(schema);
-    return (v: T) => {
-      validateViaAjv(v);
-      const e =
-        validateViaAjv.errors?.reduce((prev, curr) => {
-          const path = curr.dataPath
-            .replace(/\//g, '/properties/')
-            .split('/')
-            .map(v => v.replace(/~0/g, '~').replace(/~1/g, '/'))
-            .slice(1);
-          path.push('errors');
-          const existingValue = get(prev, path) ?? [];
-          set(prev, path, [...existingValue, curr.message]);
-          return prev;
-        }, {}) ?? {};
-      setSchemaValidity(e);
-    };
-  }, [schema]);
+  // TODO:
+  // Add ability to defer validation to different events,
+  // so the `validate` function splits into `validateAgainstSchema`
+  // (already in registry) for usage inside `onValue` and `flushValidity`
+  // to be used either in `onValue` or in `onSubmit`.
+  const validate = useCallback(
+    (value: T) => {
+      const validity = validateAgainstSchema(schema, value);
+      setSchemaValidity(validity);
+    },
+    [schema]
+  );
 
   useLayoutEffect(() => {
     // TODO: remove type cast

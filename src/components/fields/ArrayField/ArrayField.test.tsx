@@ -9,24 +9,24 @@ it('handle first render value', () => {
   expect(hasDefaultValue.prop('value')).toEqual(['12345', '56789']);
 });
 
-it('add item', () => {
+it('handle item addition', () => {
   const component = shallow(<Basic />);
   expect(component.prop('value')).toBe(undefined);
   component
     .dive()
     .dive()
-    .findWhere(v => v.type() === 'button' && v.text() === 'add')
+    .findWhere(v => v.type() === 'button' && v.text() === 'Add')
     .simulate('click');
   expect(component.prop('value')).toEqual([null]);
 });
 
-it('remove item', () => {
+it('handle item deletion', () => {
   const component = shallow(<Filled />);
   expect(component.prop('value')).toEqual(['12345', '56789']);
   component
     .dive()
     .dive()
-    .findWhere(v => v.type() === 'button' && v.text() === 'delete')
+    .findWhere(v => v.type() === 'button' && v.text() === 'Delete')
     .at(0)
     .simulate('click');
   expect(component.prop('value')).toEqual(['56789']);
