@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+import React, { ComponentType } from 'react';
 import { FieldProps } from 'src/models';
 
 export const getFieldComponent = (
