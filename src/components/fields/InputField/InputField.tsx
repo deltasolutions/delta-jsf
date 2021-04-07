@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldProps } from 'src/models';
 
-export const InputField = (props: FieldProps) => {
+export function InputField(props: FieldProps) {
   const {
     schema,
     value,
@@ -49,4 +49,4 @@ export const InputField = (props: FieldProps) => {
       />
     </PrimitiveTemplate>
   );
-};
+}

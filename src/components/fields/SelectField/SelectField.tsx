@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldProps } from 'src/models';
 
-export const SelectField = (props: FieldProps) => {
+export function SelectField(props: FieldProps) {
   const {
     schema,
     value,
@@ -66,4 +66,4 @@ export const SelectField = (props: FieldProps) => {
       </select>
     </PrimitiveTemplate>
   );
-};
+}

@@ -14,6 +14,7 @@
     "build/**/*"
   ],
   "scripts": {
+    "start:lib": "env-cmd -e development gulp start:lib",
     "build:lib": "env-cmd -e production gulp build:lib",
     "lint": "tslint './{lib,docs}/**/*.{ts,tsx}' --fix && prettier './{lib,docs}/**/*.{ts,tsx}' --write",
     "start:storybook": "env-cmd -e development start-storybook -c storybook -p 6006",
@@ -71,7 +72,7 @@
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "tslint": "^5.20.1",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.9.7",
+    "typescript": "^4.1.5",
     "yargs": "^15.4.1"
   },
   "peerDependencies": {

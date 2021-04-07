@@ -2,7 +2,7 @@ import { promises as fsp } from 'fs';
 import execa from 'execa';
 import { argv } from 'yargs';
 
-import { task, dest, src, series } from 'gulp';
+import { task, dest, src, series, watch } from 'gulp';
 import ts from 'gulp-typescript';
 
 import * as rollup from 'rollup';
@@ -30,6 +30,10 @@ task('build:lib:types', () => {
       })
     )
     .pipe(dest('build'));
+});
+
+task('start:lib', () => {
+  watch(['src/**/*'], { ignoreInitial: false }, series('build:lib:js', 'build:lib:types'));
 });
 
 task('build:lib', series('clean', 'build:lib:js', 'build:lib:types'));

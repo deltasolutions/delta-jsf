@@ -2,7 +2,7 @@ import React from 'react';
 import { FieldProps, Schema } from 'src/models';
 import { clone, getFieldComponent, merge } from 'src/utils';
 
-export const ArrayField = (props: FieldProps) => {
+export function ArrayField(props: FieldProps) {
   const {
     schema,
     layout,
@@ -65,4 +65,4 @@ export const ArrayField = (props: FieldProps) => {
       })}
     </ArrayTemplate>
   );
-};
+}
