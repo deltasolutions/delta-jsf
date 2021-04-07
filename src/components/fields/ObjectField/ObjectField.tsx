@@ -8,7 +8,7 @@ import {
   merge
 } from 'src/utils';
 
-export const ObjectField = (props: FieldProps) => {
+export function ObjectField(props: FieldProps) {
   const {
     schema,
     layout,
@@ -65,7 +65,14 @@ export const ObjectField = (props: FieldProps) => {
           layout: layout?.properties?.[key],
           value: value?.[key],
           validity: validity?.properties?.[key],
-          onValue: v => onValue?.(merge(clone(value), { [key]: v })),
+          onValue: v => {
+            onValue?.(
+              merge(clone(value), { [key]: v }, (a, b) =>
+                // cancel concat array values
+                Array.isArray(a) ? b : undefined
+              )
+            );
+          },
           onValidity: e =>
             onValidity?.(
               merge(clone(validity), { properties: { [key]: e } }, (a, b, k) =>
@@ -85,4 +92,4 @@ export const ObjectField = (props: FieldProps) => {
       })}
     </ObjectTemplate>
   );
-};
+}

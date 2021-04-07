@@ -1,5 +1,5 @@
-import { defaults } from 'src/defaults';
 import React from 'react';
+import { defaults } from 'src/defaults';
 import { useFormManager } from 'src/hooks';
 import { FormProps } from 'src/models';
 import { FormManagerOptions } from 'src/models/FormManagerOptions';

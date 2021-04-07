@@ -1,3 +1,4 @@
+import React from 'react';
 import { TemplateProps } from 'src/models';
 
 export const PanicTemplate = ({ schema, children }: TemplateProps) => (

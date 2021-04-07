@@ -1,13 +1,10 @@
-import Ajv from 'ajv';
-import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { defaults } from 'src/defaults';
 import { Validity } from 'src/models';
 import { FormManager } from 'src/models/FormManager';
 import { FormManagerOptions } from 'src/models/FormManagerOptions';
-import { clone, get, merge, set } from 'src/utils';
+import { clone, merge } from 'src/utils';
 import { useMergeQueue } from './useMergeQueue';
-
-const ajv = new Ajv();
 
 export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
   options: TOptions
