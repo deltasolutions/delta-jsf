@@ -61,7 +61,7 @@ export function ArrayField(props: FieldProps) {
           );
         }
         const Component = getFieldComponent(sub);
-        return <Component {...sub} key={`array-item-${index ** 2}`} />;
+        return <Component {...sub} key={`array-item-${index}`} />;
       })}
     </ArrayTemplate>
   );

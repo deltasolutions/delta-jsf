@@ -13,12 +13,15 @@ export const ArrayTemplate = ({
 
   const mayDelete = (values?.length ?? 0) > (minItems ?? 0);
   const handleDeletion = (itemIdex: number) =>
-    onValue?.(v => v?.filter((d, i) => i !== itemIdex) ?? []);
+    onValue?.(values?.filter((d, i) => i !== itemIdex) ?? []);
 
+  // https://json-schema.org/understanding-json-schema/reference/array.html#addtional-items
+  // additionalItems in default true
   const mayAdd =
-    (values?.length ?? 0) < (maxItems ?? Infinity) && !!additionalItems;
+    (values?.length ?? 0) < (maxItems ?? Infinity) && additionalItems !== false;
+
   const handleAddition = () =>
-    onValue?.(v => (Array.isArray(v) ? [...v, null] : [null]));
+    onValue?.(Array.isArray(values) ? [...values, null] : [null]);
 
   return (
     <div className="djsf-array">
@@ -27,7 +30,7 @@ export const ArrayTemplate = ({
       <div className="content">
         {Array.isArray(children)
           ? [...children]?.map((child, index) => (
-              <Fragment key={`array-wrap-${index ** 2}`}>
+              <Fragment key={`array-wrap-${index}`}>
                 <div className="item">
                   {child}
                   {mayDelete && (

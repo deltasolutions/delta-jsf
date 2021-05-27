@@ -50,7 +50,7 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
     onSubmit?.(value as T);
     setIsSubmitted(true);
     return value;
-  }, []);
+  }, [value]);
 
   // TODO:
   // Add ability to defer validation to different events,
