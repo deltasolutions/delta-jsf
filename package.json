@@ -79,5 +79,8 @@
     "ajv": "^7.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "json-schema-ref-parser": "^9.0.7"
   }
 }

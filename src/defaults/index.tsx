@@ -1,6 +1,7 @@
 import {
   ArrayField,
   InputField,
+  NullField,
   ObjectField,
   SelectField
 } from 'src/components';
@@ -17,7 +18,8 @@ export const defaults = {
       integer: InputField,
       select: SelectField,
       object: ObjectField,
-      array: ArrayField
+      array: ArrayField,
+      null: NullField
     },
     templates: {
       PanicTemplate,

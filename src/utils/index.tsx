@@ -7,3 +7,4 @@ export * from './guards';
 export * from './merge';
 export * from './flatPromise';
 export * from './set';
+export * from './hash';

@@ -4,6 +4,7 @@ import { Validity } from 'src/models';
 import { FormManager } from 'src/models/FormManager';
 import { FormManagerOptions } from 'src/models/FormManagerOptions';
 import { clone, merge } from 'src/utils';
+import { useDereferencedSchema } from './useDereferencedSchema';
 import { useMergeQueue } from './useMergeQueue';
 
 export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
@@ -11,14 +12,16 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
 ): TOptions extends { initialValue: T }
   ? FormManager<T>
   : FormManager<T | undefined> => {
+  const derefOptions = useDereferencedSchema(options);
   const {
+    schema,
     initialValue,
-    schema = {},
     onValue,
     onValidity,
     onSubmit,
     registry = defaults.registry
-  } = options;
+  } = derefOptions;
+
   const {
     utils: { validateAgainstSchema }
   } = registry;
@@ -75,7 +78,7 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
   }, [validity]);
 
   return {
-    options,
+    options: derefOptions,
 
     value,
     setValue,
