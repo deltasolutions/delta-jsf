@@ -44,7 +44,7 @@ export default {
     )
   ],
 
-  external: ['react', 'react-dom', 'ajv'],
+  external: ['react', 'react-dom', 'ajv', 'json-schema-ref-parser'],
 
   onwarn: (warning, rollupWarn) => {
     if (!['CIRCULAR_DEPENDENCY', 'THIS_IS_UNDEFINED'].includes(warning.code)) {
