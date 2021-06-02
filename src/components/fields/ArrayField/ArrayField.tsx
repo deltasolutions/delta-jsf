@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDefaults } from 'src/hooks';
 import { FieldProps, Schema } from 'src/models';
 import { clone, getFieldComponent, merge } from 'src/utils';
 
@@ -16,6 +17,8 @@ export function ArrayField(props: FieldProps) {
   } = props;
 
   const { items } = schema ?? {};
+
+  useDefaults(props);
 
   if (Array.isArray(items)) {
     return (

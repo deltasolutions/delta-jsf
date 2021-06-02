@@ -1,4 +1,5 @@
 import React, { useLayoutEffect } from 'react';
+import { useDefaults } from 'src/hooks';
 import { FieldProps, Schema } from 'src/models';
 import {
   clone,
@@ -20,6 +21,8 @@ export function ObjectField(props: FieldProps) {
     onValue,
     onValidity
   } = props;
+
+  useDefaults(props);
 
   const { order } = layout ?? {};
   const properties = getProperties(schema) ?? {};

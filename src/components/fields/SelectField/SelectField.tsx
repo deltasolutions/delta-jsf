@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDefaults } from 'src/hooks';
 import { FieldProps } from 'src/models';
 
 export function SelectField(props: FieldProps) {
@@ -11,6 +12,8 @@ export function SelectField(props: FieldProps) {
     },
     layout
   } = props;
+
+  useDefaults(props);
 
   const { placeholder } = layout?.options ?? {};
   const { type, oneOf } = schema;

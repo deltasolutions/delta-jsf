@@ -1,8 +1,7 @@
 import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { defaults } from 'src/defaults';
 import { Validity } from 'src/models';
-import { FormManager } from 'src/models/FormManager';
-import { FormManagerOptions } from 'src/models/FormManagerOptions';
+import { FormManager, FormManagerOptions } from 'src/models';
 import { clone, merge } from 'src/utils';
 import { useDereferencedSchema } from './useDereferencedSchema';
 import { useMergeQueue } from './useMergeQueue';

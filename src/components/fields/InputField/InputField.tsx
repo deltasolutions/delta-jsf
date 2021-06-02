@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDefaults } from 'src/hooks';
 import { FieldProps } from 'src/models';
 
 export function InputField(props: FieldProps) {
@@ -10,6 +11,8 @@ export function InputField(props: FieldProps) {
       templates: { PrimitiveTemplate, PanicTemplate }
     }
   } = props;
+
+  useDefaults(props);
 
   const type =
     typeof schema.type === 'string' &&

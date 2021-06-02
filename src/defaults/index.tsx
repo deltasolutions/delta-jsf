@@ -1,13 +1,14 @@
 import {
+  createFieldTemplate,
   ArrayField,
+  ArrayTemplate,
   InputField,
   NullField,
   ObjectField,
+  PanicTemplate,
   SelectField
 } from 'src/components';
-import { ArrayTemplate } from './ArrayTemplate';
-import { PanicTemplate } from './PanicTemplate';
-import { createFieldTemplate } from './createFieldTemplate';
+
 import { validateAgainstSchema } from './validateAgainstSchema';
 
 export const defaults = {
