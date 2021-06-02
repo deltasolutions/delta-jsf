@@ -1,17 +1,16 @@
-import RefParser from 'json-schema-ref-parser';
 import { useCallback, useEffect, useState } from 'react';
 import { FormManagerOptions, Schema } from 'src/models';
-import { hash } from 'src/utils';
+import { dereference as defaultDereference, hash } from 'src/utils';
 
 export const useDereferencedSchema = <T extends any>(
   options: FormManagerOptions<T>
 ): FormManagerOptions<T> => {
-  const { schema, layout, ...rest } = options;
+  const { schema, layout, dereference = defaultDereference, ...rest } = options;
 
   const [derefSchema, setDerefSchema] = useState<Schema | undefined>();
 
   const updateSchema = useCallback(async (data: any) => {
-    const res = await RefParser.dereference(data);
+    const res = await dereference(data);
     setDerefSchema(res as any);
   }, []);
 

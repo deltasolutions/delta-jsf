@@ -8,3 +8,4 @@ export * from './merge';
 export * from './flatPromise';
 export * from './set';
 export * from './hash';
+export * from './dereference';

@@ -9,6 +9,7 @@ export interface FormManagerOptions<T = any> {
   schema: Schema;
   layout?: Layout;
   registry?: Registry;
+  dereference?: (schema: Schema) => Promise<Schema>;
   onValue?: (value: T) => void;
   onValidity?: (validation: Validity) => void;
   onSubmit?: (value: T) => void;
