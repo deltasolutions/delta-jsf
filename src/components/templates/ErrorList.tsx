@@ -5,7 +5,7 @@ export interface ErrorListProps {
   validity?: Validity;
 }
 
-export const ErrorList = ({ validity }: ErrorListProps) => {
+export function ErrorList({ validity }: ErrorListProps) {
   const errors = validity?.errors ?? [];
   if (errors.length < 1) {
     return null;
@@ -17,4 +17,4 @@ export const ErrorList = ({ validity }: ErrorListProps) => {
       ))}
     </div>
   );
-};
+}

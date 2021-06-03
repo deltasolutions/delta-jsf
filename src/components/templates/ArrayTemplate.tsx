@@ -2,13 +2,13 @@ import React, { Fragment } from 'react';
 import { TemplateProps } from 'src/models';
 import { ErrorList } from './ErrorList';
 
-export const ArrayTemplate = ({
+export function ArrayTemplate({
   children,
   schema,
   validity,
   value: values,
   onValue
-}: TemplateProps) => {
+}: TemplateProps) {
   const { additionalItems, maxItems, minItems } = schema ?? {};
 
   const mayDelete = (values?.length ?? 0) > (minItems ?? 0);
@@ -47,4 +47,4 @@ export const ArrayTemplate = ({
       </div>
     </div>
   );
-};
+}

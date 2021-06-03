@@ -1,11 +1,13 @@
 import React from 'react';
 import { TemplateProps } from 'src/models';
 
-export const PanicTemplate = ({ schema, children }: TemplateProps) => (
-  <div className="djsf-panic">
-    {children}
-    <pre>
-      <code>{JSON.stringify(schema, null, 2)}</code>
-    </pre>
-  </div>
-);
+export function PanicTemplate({ schema, children }: TemplateProps) {
+  return (
+    <div className="djsf-panic">
+      {children}
+      <pre>
+        <code>{JSON.stringify(schema, null, 2)}</code>
+      </pre>
+    </div>
+  );
+}
