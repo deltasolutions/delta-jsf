@@ -3,3 +3,4 @@ export * from './useFormManager';
 export * from './useDereferencedSchema';
 export * from './useIsomorphicLayoutEffect';
 export * from './useDefaults';
+export * from './useArrayHandlers';
