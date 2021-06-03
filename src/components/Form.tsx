@@ -6,6 +6,7 @@ import { FormManagerOptions } from 'src/models';
 import { areManagedFormProps, getFieldComponent } from 'src/utils';
 
 export const Form = <T extends unknown>(props: FormProps<T>) => {
+  const { style, className, id, children } = props ?? {};
   const defaultManager = useFormManager(props as FormManagerOptions<T>);
   const targetManager = areManagedFormProps(props)
     ? props.manager
@@ -42,6 +43,9 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
 
   return (
     <form
+      style={style}
+      className={className}
+      id={id}
       noValidate
       onSubmit={async e => {
         e.preventDefault();
@@ -53,7 +57,7 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
       }}
     >
       <RootField {...rootFieldProps} />
-      {props.children}
+      {children}
     </form>
   );
 };
