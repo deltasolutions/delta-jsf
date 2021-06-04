@@ -77,7 +77,7 @@
   },
   "peerDependencies": {
     "ajv": "^7.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16 || ^17",
+    "react-dom": "^16 || ^17"
   }
 }
