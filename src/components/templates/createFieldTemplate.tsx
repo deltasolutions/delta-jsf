@@ -1,6 +1,6 @@
 import React from 'react';
-import { TemplateProps } from 'src/models';
 import { ErrorList } from './ErrorList';
+import { TemplateProps } from 'src/models';
 
 export function createFieldTemplate(topClassName: string) {
   return function ({ children, schema, validity }: TemplateProps) {

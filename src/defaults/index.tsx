@@ -1,3 +1,4 @@
+import { validateAgainstSchema } from './validateAgainstSchema';
 import {
   createFieldTemplate,
   ArrayField,
@@ -8,8 +9,6 @@ import {
   PanicTemplate,
   SelectField
 } from 'src/components';
-
-import { validateAgainstSchema } from './validateAgainstSchema';
 
 export const defaults = {
   registry: {

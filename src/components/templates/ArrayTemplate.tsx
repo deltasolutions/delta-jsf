@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
+import { ErrorList } from './ErrorList';
 import { useArrayHandlers } from 'src/hooks';
 import { TemplateProps } from 'src/models';
-import { ErrorList } from './ErrorList';
 
 export function ArrayTemplate(props: TemplateProps) {
   const { children, schema, validity } = props;

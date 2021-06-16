@@ -1,10 +1,10 @@
-import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import { useDereferencedSchema } from './useDereferencedSchema';
+import { useMergeQueue } from './useMergeQueue';
 import { defaults } from 'src/defaults';
 import { Validity } from 'src/models';
 import { FormManager, FormManagerOptions } from 'src/models';
 import { clone, merge } from 'src/utils';
-import { useDereferencedSchema } from './useDereferencedSchema';
-import { useMergeQueue } from './useMergeQueue';
 
 export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
   options: TOptions

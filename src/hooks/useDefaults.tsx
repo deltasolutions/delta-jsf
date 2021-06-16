@@ -1,5 +1,5 @@
-import { FieldProps } from 'src';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
+import { FieldProps } from 'src';
 
 export const useDefaults = (props: FieldProps) => {
   const {

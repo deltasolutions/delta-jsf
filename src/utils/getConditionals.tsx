@@ -1,8 +1,8 @@
 import Ajv from 'ajv';
-import { Schema } from 'src/models';
 import { clone } from './clone';
 import { isObject } from './guards';
 import { merge } from './merge';
+import { Schema } from 'src/models';
 
 const ajv = new Ajv();
 

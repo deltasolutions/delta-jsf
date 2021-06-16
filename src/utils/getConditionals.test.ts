@@ -1,5 +1,5 @@
-import { Schema } from 'src/models';
 import { getConditionals } from './getConditionals';
+import { Schema } from 'src/models';
 
 const schemaA: Schema = {
   type: 'object',

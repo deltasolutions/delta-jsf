@@ -1,6 +1,5 @@
-import { Schema } from 'src/models';
 import { dereference } from './dereference';
-
+import { Schema } from 'src/models';
 
 const schemaA: any = {
   type: 'object',
@@ -95,8 +94,124 @@ const schemaA: any = {
   }
 };
 
-const schemaARes = { "type": "object", "title": "Form", "$defs": { "main_config": { "type": "object", "properties": { "firstMain": { "type": "string", "title": "First main properties" }, "secondMain": { "type": "string", "title": "Second main properties" } }, "required": ["firstMain", "secondMain"] }, "first_config": { "title": "A-config", "type": "object", "allOf": [{ "type": "object", "properties": { "firstMain": { "type": "string", "title": "First main properties" }, "secondMain": { "type": "string", "title": "Second main properties" } }, "required": ["firstMain", "secondMain"] }, { "type": "object", "properties": { "first": { "type": "string", "title": "First A-type properties" }, "second": { "type": "string", "title": "Second A-type properties" } } }] }, "second_config": { "title": "B-config", "type": "object", "allOf": [{ "type": "object", "properties": { "firstMain": { "type": "string", "title": "First main properties" }, "secondMain": { "type": "string", "title": "Second main properties" } }, "required": ["firstMain", "secondMain"] }, { "type": "object", "properties": { "first": { "type": "string", "title": "First B-type properties" }, "second": { "type": "string", "title": "Second B-type properties" } } }] } }, "required": ["main", "sub"], "properties": { "main": { "oneOf": [{ "const": "a", "title": "A" }, { "const": "b", "title": "B" }], "title": "Config type", "type": "string" } }, "if": { "properties": { "main": { "const": "a" } } }, "then": { "properties": { "sub": { "title": "A-config", "type": "object", "allOf": [{ "type": "object", "properties": { "firstMain": { "type": "string", "title": "First main properties" }, "secondMain": { "type": "string", "title": "Second main properties" } }, "required": ["firstMain", "secondMain"] }, { "type": "object", "properties": { "first": { "type": "string", "title": "First A-type properties" }, "second": { "type": "string", "title": "Second A-type properties" } } }] } } }, "else": { "properties": { "sub": { "title": "B-config", "type": "object", "allOf": [{ "type": "object", "properties": { "firstMain": { "type": "string", "title": "First main properties" }, "secondMain": { "type": "string", "title": "Second main properties" } }, "required": ["firstMain", "secondMain"] }, { "type": "object", "properties": { "first": { "type": "string", "title": "First B-type properties" }, "second": { "type": "string", "title": "Second B-type properties" } } }] } } } }
-
+const schemaARes = {
+  type: 'object',
+  title: 'Form',
+  $defs: {
+    main_config: {
+      type: 'object',
+      properties: {
+        firstMain: { type: 'string', title: 'First main properties' },
+        secondMain: { type: 'string', title: 'Second main properties' }
+      },
+      required: ['firstMain', 'secondMain']
+    },
+    first_config: {
+      title: 'A-config',
+      type: 'object',
+      allOf: [
+        {
+          type: 'object',
+          properties: {
+            firstMain: { type: 'string', title: 'First main properties' },
+            secondMain: { type: 'string', title: 'Second main properties' }
+          },
+          required: ['firstMain', 'secondMain']
+        },
+        {
+          type: 'object',
+          properties: {
+            first: { type: 'string', title: 'First A-type properties' },
+            second: { type: 'string', title: 'Second A-type properties' }
+          }
+        }
+      ]
+    },
+    second_config: {
+      title: 'B-config',
+      type: 'object',
+      allOf: [
+        {
+          type: 'object',
+          properties: {
+            firstMain: { type: 'string', title: 'First main properties' },
+            secondMain: { type: 'string', title: 'Second main properties' }
+          },
+          required: ['firstMain', 'secondMain']
+        },
+        {
+          type: 'object',
+          properties: {
+            first: { type: 'string', title: 'First B-type properties' },
+            second: { type: 'string', title: 'Second B-type properties' }
+          }
+        }
+      ]
+    }
+  },
+  required: ['main', 'sub'],
+  properties: {
+    main: {
+      oneOf: [
+        { const: 'a', title: 'A' },
+        { const: 'b', title: 'B' }
+      ],
+      title: 'Config type',
+      type: 'string'
+    }
+  },
+  if: { properties: { main: { const: 'a' } } },
+  then: {
+    properties: {
+      sub: {
+        title: 'A-config',
+        type: 'object',
+        allOf: [
+          {
+            type: 'object',
+            properties: {
+              firstMain: { type: 'string', title: 'First main properties' },
+              secondMain: { type: 'string', title: 'Second main properties' }
+            },
+            required: ['firstMain', 'secondMain']
+          },
+          {
+            type: 'object',
+            properties: {
+              first: { type: 'string', title: 'First A-type properties' },
+              second: { type: 'string', title: 'Second A-type properties' }
+            }
+          }
+        ]
+      }
+    }
+  },
+  else: {
+    properties: {
+      sub: {
+        title: 'B-config',
+        type: 'object',
+        allOf: [
+          {
+            type: 'object',
+            properties: {
+              firstMain: { type: 'string', title: 'First main properties' },
+              secondMain: { type: 'string', title: 'Second main properties' }
+            },
+            required: ['firstMain', 'secondMain']
+          },
+          {
+            type: 'object',
+            properties: {
+              first: { type: 'string', title: 'First B-type properties' },
+              second: { type: 'string', title: 'Second B-type properties' }
+            }
+          }
+        ]
+      }
+    }
+  }
+};
 
 const schemaB: any = {
   type: 'object',

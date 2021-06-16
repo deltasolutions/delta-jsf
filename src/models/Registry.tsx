@@ -1,8 +1,8 @@
 import { ComponentType } from 'react';
-import { Schema } from 'src';
 import { FieldProps } from './FieldProps';
 import { TemplateProps } from './TemplateProps';
 import { Validity } from './Validity';
+import { Schema } from 'src';
 
 export interface Registry {
   fields: Record<string, ComponentType<FieldProps>>;

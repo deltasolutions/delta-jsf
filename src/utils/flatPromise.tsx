@@ -1,4 +1,4 @@
-import { isObject } from "./guards";
+import { isObject } from './guards';
 
 export const flatPromise = async (maybePromise: any) => {
   const value = await maybePromise;
