@@ -1,12 +1,12 @@
 {
   "name": "delta-jsf",
   "version": "0.3.3",
-  "license": "MIT",
   "homepage": "https://deltasolutions.github.io/delta-jsf/",
   "repository": {
     "type": "git",
     "url": "https://github.com/deltasolutions/delta-jsf.git"
   },
+  "license": "MIT",
   "main": "build/index.cjs",
   "module": "build/index.js",
   "types": "build/index.d.ts",
@@ -14,13 +14,13 @@
     "build/**/*"
   ],
   "scripts": {
-    "start:lib": "env-cmd -e development gulp start:lib",
     "build:lib": "env-cmd -e production gulp build:lib",
-    "lint": "tslint './{lib,docs}/**/*.{ts,tsx}' --fix && prettier './{lib,docs}/**/*.{ts,tsx}' --write",
-    "start:storybook": "env-cmd -e development start-storybook -c storybook -p 6006",
-    "build:storybook": "env-cmd -e development build-storybook -c storybook",
+    "lint": "env-cmd -e development gulp lint",
+    "pages": "env-cmd -e production gulp pages",
+    "release": "env-cmd -e production gulp release",
     "test": "jest",
-    "release": "env-cmd -e production gulp release"
+    "start:docs": "env-cmd -e development gulp start:docs",
+    "build:docs": "env-cmd -e production gulp build:docs"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -50,12 +50,17 @@
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
     "@types/react-router-dom": "^5.1.5",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
     "ajv": "^7.0.4",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.2",
     "env-cmd": "^10.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
+    "eslint": "^7.28.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.23.4",
     "execa": "^4.1.0",
     "gh-pages": "^3.1.0",
     "gulp": "^4.0.2",
@@ -68,10 +73,9 @@
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.32.7",
     "sass-loader": "^10.1.1",
+    "semver": "^6.3.0",
     "style-loader": "^2.0.0",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
-    "tslint": "^5.20.1",
-    "tslint-react": "^3.6.0",
     "typescript": "^4.1.5",
     "yargs": "^15.4.1"
   },
