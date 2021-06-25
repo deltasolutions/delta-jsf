@@ -7,7 +7,6 @@ export const useDefaults = (props: FieldProps) => {
     onValue,
     schema: { default: defaultValue }
   } = props;
-
   useIsomorphicLayoutEffect(() => {
     if (!value && defaultValue) {
       onValue?.(defaultValue);

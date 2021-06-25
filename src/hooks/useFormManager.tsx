@@ -1,9 +1,9 @@
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
-import { defaults } from '../components/defaults';
+import { defaults } from '../components';
 import { Validity } from '../models';
 import { FormManager, FormManagerOptions } from '../models';
 import { clone, merge } from '../utils';
-import { useDereferencedSchema } from './useDereferencedSchema';
+import { useDereferencedOptions } from './useDereferencedOptions';
 import { useMergeQueue } from './useMergeQueue';
 
 export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
@@ -11,7 +11,7 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
 ): TOptions extends { initialValue: T }
   ? FormManager<T>
   : FormManager<T | undefined> => {
-  const dereferencedOptions = useDereferencedSchema(options);
+  const dereferencedOptions = useDereferencedOptions(options);
   const {
     schema,
     initialValue,

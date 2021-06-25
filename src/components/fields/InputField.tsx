@@ -36,14 +36,14 @@ export function InputField(props: FieldProps) {
       <input
         type={inputType}
         step={step}
-        value={value ?? ''}
+        value={value?.toString() ?? ''}
         min={minimum}
         max={maximum}
         onChange={e => {
           let v: string | number | undefined = e.target.value;
           if (v === '') {
             v = undefined;
-          } else if (type === 'number') {
+          } else if (inputType === 'number') {
             v = +v;
           }
           onValue?.(v);

@@ -12,6 +12,7 @@ export const getFieldComponent = (
     }
   } = props;
   const Unknown = () => <PanicTemplate {...props}>Unknown field</PanicTemplate>;
+  Unknown.displayName = 'Unknown';
   if (typeof field === 'string') {
     return fields[field] ?? Unknown;
   }

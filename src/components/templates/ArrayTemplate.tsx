@@ -6,7 +6,6 @@ import { ErrorList } from './ErrorList';
 export function ArrayTemplate(props: TemplateProps) {
   const { children, schema, validity } = props;
   const { handleDelete, handleAdd } = useArrayHandlers(props);
-
   return (
     <div className="djsf-array">
       {schema.title && <div className="title">{schema.title}</div>}

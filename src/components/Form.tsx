@@ -1,12 +1,14 @@
 import React from 'react';
 import { useFormManager } from '../hooks';
-import { FormManagerOptions, FormProps, Validity } from '../models';
+import { FormProps, Validity } from '../models';
 import { areManagedFormProps, getFieldComponent } from '../utils';
 import { defaults } from './defaults';
 
 export const Form = <T extends unknown>(props: FormProps<T>) => {
   const { style, className, id, children } = props ?? {};
-  const defaultManager = useFormManager(props as FormManagerOptions<T>);
+  const defaultManager = useFormManager(
+    areManagedFormProps(props) ? { schema: { type: 'null' } } : props
+  );
   const targetManager = areManagedFormProps(props)
     ? props.manager
     : defaultManager;

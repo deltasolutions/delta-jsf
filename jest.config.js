@@ -4,6 +4,7 @@ module.exports = {
     '\\.(svg|png|pcss|jpg)$': '<rootDir>/src/tests/stub.ts',
     '^storybook/(.*)$': '<rootDir>/storybook/$1',
     '^src/(.*)$': '<rootDir>/src/$1',
+    '^src$': '<rootDir>/src'
   },
   verbose: true,
   setupFilesAfterEnv: ['<rootDir>/src/tests/setup.ts']

@@ -45,7 +45,7 @@ export default {
   external: ['react', 'react-dom', 'ajv'],
 
   onwarn: (warning, rollupWarn) => {
-    if (!['CIRCULAR_DEPENDENCY', 'THIS_IS_UNDEFINED'].includes(warning.code)) {
+    if (!['THIS_IS_UNDEFINED'].includes(warning.code)) {
       rollupWarn(warning);
     }
   }

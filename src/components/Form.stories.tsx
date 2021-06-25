@@ -13,7 +13,6 @@ export default meta;
 export const Basics = props => {
   const formProps = useStoryFormProps({
     ...props,
-    onSubmit: values => console.log(values),
     schema: {
       type: 'object',
       title: 'Form',
@@ -51,4 +50,35 @@ export const Basics = props => {
     }
   });
   return <Form {...formProps} />;
+};
+
+export const Sandbox = props => {
+  const { schema, ...rest } = props ?? {};
+  const formProps = useStoryFormProps({
+    schema: schema || {
+      type: 'null',
+      title: 'Invalid JSON'
+    },
+    ...rest
+  });
+  return <Form {...formProps} />;
+};
+Sandbox.args = {
+  schema: {
+    type: 'object',
+    title: 'Please, login',
+    properties: {
+      username: {
+        title: 'Username',
+        type: 'string'
+      },
+      password: {
+        title: 'Password',
+        type: 'string',
+        minLength: 8
+      }
+    },
+    required: ['username', 'password']
+  },
+  initialValue: {}
 };
