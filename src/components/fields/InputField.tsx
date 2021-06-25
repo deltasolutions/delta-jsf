@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDefaults } from 'src/hooks';
-import { FieldProps } from 'src/models';
+import { useDefaults } from '../../hooks';
+import { FieldProps } from '../../models';
 
 export function InputField(props: FieldProps) {
   const {
-    schema,
+    schema: { type, multipleOf, minimum, maximum },
     value,
     onValue,
     registry: {
@@ -14,37 +14,36 @@ export function InputField(props: FieldProps) {
 
   useDefaults(props);
 
-  const type =
-    typeof schema.type === 'string' &&
+  const inputType =
+    typeof type === 'string' &&
     {
       string: 'text',
       number: 'number',
       integer: 'number'
-    }[schema.type];
+    }[type];
 
-  if (!type) {
+  if (!inputType) {
     return <PanicTemplate {...props}>Invalid schema type</PanicTemplate>;
   }
 
   const step =
-    schema.type === 'integer' &&
-    (!schema.multipleOf || schema.multipleOf % 1 !== 0)
+    type === 'integer' && (!multipleOf || multipleOf % 1 !== 0)
       ? 1
-      : schema.multipleOf;
+      : multipleOf;
 
   return (
     <PrimitiveTemplate {...props}>
       <input
-        type={type}
+        type={inputType}
         step={step}
-        value={value ?? ''}
-        min={schema.minimum}
-        max={schema.maximum}
+        value={value?.toString() ?? ''}
+        min={minimum}
+        max={maximum}
         onChange={e => {
           let v: string | number | undefined = e.target.value;
           if (v === '') {
             v = undefined;
-          } else if (type === 'number') {
+          } else if (inputType === 'number') {
             v = +v;
           }
           onValue?.(v);

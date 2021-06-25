@@ -1,20 +1,20 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { Basic, Filled } from './SelectField.stories';
+import { Basics, InitialValue } from './SelectField.stories';
 
 test('handle first render value', () => {
-  const withoutDefaultValue = shallow(<Basic />);
+  const withoutDefaultValue = shallow(<Basics />);
   expect(withoutDefaultValue.prop('value')).toBe(undefined);
-  const hasDefaultValue = shallow(<Filled />);
+  const hasDefaultValue = shallow(<InitialValue />);
   expect(hasDefaultValue.prop('value')).toBe('2');
 });
 
 test('handle changes', () => {
-  const component = shallow(<Basic />);
+  const component = shallow(<Basics />);
+  const element = component.dive().find('select').at(0);
   expect(component.prop('value')).toBe(undefined);
-  const selectElem = component.dive().find('select').at(0);
-  selectElem.simulate('change', { target: { value: '1' } });
+  element.simulate('change', { target: { value: '1' } });
   expect(component.prop('value')).toBe('1');
-  selectElem.simulate('change', { target: { value: '2' } });
+  element.simulate('change', { target: { value: '2' } });
   expect(component.prop('value')).toBe('2');
 });

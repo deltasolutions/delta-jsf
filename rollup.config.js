@@ -1,12 +1,9 @@
 import process from 'process';
-
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import { terser } from 'rollup-plugin-terser';
-
-import babelConfig from './babel.config';
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs'];
 
@@ -31,23 +28,24 @@ export default {
     babel({
       extensions,
       babelHelpers: 'runtime',
-      ...babelConfig
+      exclude: '**/node_modules/**'
     }),
-    replace(
-      Object.entries(process.env).reduce(
+    replace({
+      preventAssignment: true,
+      ...Object.entries(process.env).reduce(
         (prev, [k, v]) => ({
           ...prev,
           [`process.env.${k}`]: JSON.stringify(v)
         }),
         {}
       )
-    )
+    })
   ],
 
   external: ['react', 'react-dom', 'ajv'],
 
   onwarn: (warning, rollupWarn) => {
-    if (!['CIRCULAR_DEPENDENCY', 'THIS_IS_UNDEFINED'].includes(warning.code)) {
+    if (!['THIS_IS_UNDEFINED'].includes(warning.code)) {
       rollupWarn(warning);
     }
   }

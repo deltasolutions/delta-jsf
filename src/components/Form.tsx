@@ -1,19 +1,20 @@
 import React from 'react';
-import { defaults } from 'src/defaults';
-import { useFormManager } from 'src/hooks';
-import { FormProps } from 'src/models';
-import { FormManagerOptions } from 'src/models';
-import { areManagedFormProps, getFieldComponent } from 'src/utils';
+import { useFormManager } from '../hooks';
+import { FormProps, Validity } from '../models';
+import { areManagedFormProps, getFieldComponent } from '../utils';
+import { defaults } from './defaults';
 
 export const Form = <T extends unknown>(props: FormProps<T>) => {
   const { style, className, id, children } = props ?? {};
-  const defaultManager = useFormManager(props as FormManagerOptions<T>);
+  const defaultManager = useFormManager(
+    areManagedFormProps(props) ? { schema: { type: 'null' } } : props
+  );
   const targetManager = areManagedFormProps(props)
     ? props.manager
     : defaultManager;
 
   const {
-    options: { schema, layout, registry = defaults.registry },
+    options: { schema, registry = defaults.registry },
     value,
     validity,
     setValue,
@@ -26,7 +27,6 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
 
   const rootFieldProps = {
     schema,
-    layout,
     registry,
     value,
     validity,
@@ -34,8 +34,8 @@ export const Form = <T extends unknown>(props: FormProps<T>) => {
       setValue(v);
       validate(v);
     },
-    onValidity: e => {
-      extendValidity(e as any);
+    onValidity: (e: Validity) => {
+      extendValidity(e);
     }
   };
 

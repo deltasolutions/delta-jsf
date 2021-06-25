@@ -1,7 +1,5 @@
-import { defaults } from 'src/defaults';
-import { useFormManager } from 'src/hooks';
-import { FormProps } from 'src/models';
-import { FormManagerOptions } from 'src/models';
+import React from 'react';
+import { defaults, useFormManager, FormProps, FormManagerOptions } from 'src';
 
 export const useStoryFormProps = <T extends unknown>(
   options: FormManagerOptions<T>

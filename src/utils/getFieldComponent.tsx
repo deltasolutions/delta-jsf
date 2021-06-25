@@ -1,20 +1,23 @@
 import React, { ComponentType } from 'react';
-import { FieldProps } from 'src/models';
+import { FieldProps } from '../models';
 
 export const getFieldComponent = (
   props: FieldProps
 ): ComponentType<FieldProps> => {
-  const { schema, layout, registry } = props;
   const {
-    fields,
-    templates: { PanicTemplate }
-  } = registry;
+    schema: { type, layout: { field } = {} },
+    registry: {
+      fields,
+      templates: { PanicTemplate }
+    }
+  } = props;
   const Unknown = () => <PanicTemplate {...props}>Unknown field</PanicTemplate>;
-  if (layout?.field) {
-    return fields[layout.field] ?? Unknown;
+  Unknown.displayName = 'Unknown';
+  if (typeof field === 'string') {
+    return fields[field] ?? Unknown;
   }
-  if (typeof schema?.type === 'string') {
-    return fields[schema.type] ?? Unknown;
+  if (typeof type === 'string') {
+    return fields[type] ?? Unknown;
   }
   return Unknown;
 };

@@ -10,18 +10,22 @@ const meta: Meta = {
 
 export default meta;
 
-export const Basic = props => {
+export const Basics = props => {
   const fieldProps = useStoryFieldProps(props);
   return (
     <ObjectField
       schema={{
         type: 'object',
-        title: 'Basic object',
+        title: 'Object with two fields',
         properties: {
           a: {
             title: 'AAA',
             type: 'string',
-            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }]
+            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }],
+            layout: {
+              field: 'select',
+              placeholder: 'Select an option'
+            }
           },
           b: {
             title: 'BBB',
@@ -29,17 +33,12 @@ export const Basic = props => {
           }
         }
       }}
-      layout={{
-        properties: {
-          a: { field: 'select', options: { placeholder: 'select an option' } }
-        }
-      }}
       {...fieldProps}
     />
   );
 };
 
-export const Filled = props => {
+export const InitialValue = props => {
   const fieldProps = useStoryFieldProps(props, {
     a: 2,
     b: 'test-42',
@@ -49,12 +48,13 @@ export const Filled = props => {
     <ObjectField
       schema={{
         type: 'object',
-        title: 'Basic object',
+        title: 'Object with initial value',
         properties: {
           a: {
             title: 'AAA',
             type: 'string',
-            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }]
+            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }],
+            layout: { field: 'select' }
           },
           b: {
             title: 'BBB',
@@ -65,11 +65,6 @@ export const Filled = props => {
             type: 'array',
             items: { type: 'string' }
           }
-        }
-      }}
-      layout={{
-        properties: {
-          a: { field: 'select' }
         }
       }}
       {...fieldProps}
@@ -152,7 +147,7 @@ export const MultipleIfs = props => {
     <ObjectField
       schema={{
         type: 'object',
-        title: 'Object with if usage',
+        title: 'Object with multiple ifs usage',
         allOf: [
           {
             type: 'object',

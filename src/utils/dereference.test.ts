@@ -1,11 +1,10 @@
-import { dereference } from './dereference';
-import { Schema } from 'src/models';
+import { dereference } from 'src';
 
-const schemaA: any = {
+const a: any = {
   type: 'object',
   title: 'Form',
   $defs: {
-    main_config: {
+    mainConfig: {
       type: 'object',
       properties: {
         firstMain: {
@@ -19,11 +18,11 @@ const schemaA: any = {
       },
       required: ['firstMain', 'secondMain']
     },
-    first_config: {
+    firstConfig: {
       title: 'A-config',
       type: 'object',
       allOf: [
-        { $ref: '#/$defs/main_config' },
+        { $ref: '#/$defs/mainConfig' },
         {
           type: 'object',
           properties: {
@@ -39,11 +38,11 @@ const schemaA: any = {
         }
       ]
     },
-    second_config: {
+    secondConfig: {
       title: 'B-config',
       type: 'object',
       allOf: [
-        { $ref: '#/$defs/main_config' },
+        { $ref: '#/$defs/mainConfig' },
         {
           type: 'object',
           properties: {
@@ -81,24 +80,24 @@ const schemaA: any = {
   then: {
     properties: {
       sub: {
-        $ref: '#/$defs/first_config'
+        $ref: '#/$defs/firstConfig'
       }
     }
   },
   else: {
     properties: {
       sub: {
-        $ref: '#/$defs/second_config'
+        $ref: '#/$defs/secondConfig'
       }
     }
   }
 };
 
-const schemaARes = {
+const aRes = {
   type: 'object',
   title: 'Form',
   $defs: {
-    main_config: {
+    mainConfig: {
       type: 'object',
       properties: {
         firstMain: { type: 'string', title: 'First main properties' },
@@ -106,7 +105,7 @@ const schemaARes = {
       },
       required: ['firstMain', 'secondMain']
     },
-    first_config: {
+    firstConfig: {
       title: 'A-config',
       type: 'object',
       allOf: [
@@ -127,7 +126,7 @@ const schemaARes = {
         }
       ]
     },
-    second_config: {
+    secondConfig: {
       title: 'B-config',
       type: 'object',
       allOf: [
@@ -213,7 +212,7 @@ const schemaARes = {
   }
 };
 
-const schemaB: any = {
+const b: any = {
   type: 'object',
   title: 'Form',
   allOf: [
@@ -250,9 +249,9 @@ const schemaB: any = {
 };
 
 it('schema A test', () => {
-  expect(dereference(schemaA)).toEqual(schemaARes);
+  expect(dereference(a)).toEqual(aRes);
 });
 
 it('schema B (without refs) test', () => {
-  expect(dereference(schemaB)).toEqual(schemaB);
+  expect(dereference(b)).toEqual(b);
 });

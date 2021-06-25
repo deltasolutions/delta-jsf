@@ -10,32 +10,26 @@ const meta: Meta = {
 
 export default meta;
 
-export const Basic = props => {
-  const { type, initValue } = props;
+export const Basics = props => {
+  const { type } = props;
   const fieldProps = useStoryFieldProps(props);
   return (
     <InputField schema={{ type, title: 'Primitive field' }} {...fieldProps} />
   );
 };
-
-Basic.args = {
-  type: 'string'
-};
-
-Basic.argTypes = {
+Basics.args = { type: 'string' };
+Basics.argTypes = {
   type: {
-    control: {
-      type: 'inline-radio',
-      options: ['string', 'number', 'integer', 'wrong']
-    }
+    options: ['string', 'number', 'integer', 'wrong'],
+    control: { type: 'inline-radio' }
   }
 };
 
-export const Filled = props => {
+export const InitialValue = props => {
   const fieldProps = useStoryFieldProps(props, 'lorem');
   return (
     <InputField
-      schema={{ type: 'string', title: 'With init value' }}
+      schema={{ type: 'string', title: 'String field initial value' }}
       {...fieldProps}
     />
   );

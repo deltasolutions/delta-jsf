@@ -10,28 +10,17 @@ const meta: Meta = {
 
 export default meta;
 
-export const Basic = props => {
+export const Basics = props => {
   const fieldProps = useStoryFieldProps(props);
   return (
     <SelectField
       schema={{
         type: 'string',
         title: 'Select field',
-        oneOf: [
-          {
-            const: '1'
-          },
-          {
-            const: '2'
-          },
-          {
-            const: '3'
-          }
-        ]
-      }}
-      layout={{
-        options: {
-          placeholder: 'select an option'
+        oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }],
+        layout: {
+          field: 'select',
+          placeholder: 'Select an option'
         }
       }}
       {...fieldProps}
@@ -39,24 +28,15 @@ export const Basic = props => {
   );
 };
 
-export const Filled = props => {
+export const InitialValue = props => {
   const fieldProps = useStoryFieldProps(props, '2');
   return (
     <SelectField
       schema={{
         type: 'string',
-        title: 'With init value',
-        oneOf: [
-          {
-            const: '1'
-          },
-          {
-            const: '2'
-          },
-          {
-            const: '3'
-          }
-        ]
+        title: 'With initial value',
+        oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }],
+        layout: { field: 'select' }
       }}
       {...fieldProps}
     />

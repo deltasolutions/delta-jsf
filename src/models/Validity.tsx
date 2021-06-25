@@ -1,5 +1,7 @@
 export interface Validity {
   errors?: string[];
   items?: Validity[];
-  properties?: Record<string, Validity>;
+  properties?: {
+    [key: string]: Validity;
+  };
 }

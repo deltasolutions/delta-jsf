@@ -10,12 +10,12 @@ const meta: Meta = {
 
 export default meta;
 
-export const Basic = props => {
+export const Basics = props => {
   const fieldProps = useStoryFieldProps(props);
   return (
     <ArrayField
       schema={{
-        title: 'Basic object',
+        title: 'Array of strings',
         type: 'array',
         items: {
           type: 'string',
@@ -28,12 +28,12 @@ export const Basic = props => {
   );
 };
 
-export const Filled = props => {
+export const InitialValue = props => {
   const fieldProps = useStoryFieldProps(props, ['12345', '56789']);
   return (
     <ArrayField
       schema={{
-        title: 'With init value',
+        title: 'Array with initial value',
         type: 'array',
         items: {
           type: 'string',
@@ -46,12 +46,12 @@ export const Filled = props => {
   );
 };
 
-export const MaxMin = props => {
+export const ItemsLimits = props => {
   const fieldProps = useStoryFieldProps(props, ['1', '2']);
   return (
     <ArrayField
       schema={{
-        title: 'With max/min props',
+        title: 'With maxItems and minItems',
         type: 'array',
         maxItems: 3,
         minItems: 1,

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDefaults } from 'src/hooks';
-import { FieldProps } from 'src/models';
+import { useDefaults } from '../../hooks';
+import { FieldProps } from '../../models';
 
 export function SelectField(props: FieldProps) {
   const {
@@ -9,14 +9,12 @@ export function SelectField(props: FieldProps) {
     onValue,
     registry: {
       templates: { PrimitiveTemplate, PanicTemplate }
-    },
-    layout
+    }
   } = props;
 
   useDefaults(props);
 
-  const { placeholder } = layout?.options ?? {};
-  const { type, oneOf } = schema;
+  const { type, oneOf, layout: { placeholder } = {} } = schema;
 
   if (type !== 'string') {
     return (

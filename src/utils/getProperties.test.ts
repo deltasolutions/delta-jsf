@@ -1,5 +1,4 @@
-import { getProperties } from './getProperties';
-import { Schema } from 'src/models';
+import { getProperties, Schema } from 'src';
 
 it('merge properties from multiple sources', () => {
   const schema: Schema = {

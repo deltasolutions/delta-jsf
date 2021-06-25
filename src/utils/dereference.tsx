@@ -1,5 +1,5 @@
+import { Schema } from '../models';
 import { get } from './get';
-import { Schema } from 'src/models';
 
 export const dereference = (schema: Schema, root?: Schema): Schema =>
   Object.entries(schema).reduce((acc, [key, value]) => {

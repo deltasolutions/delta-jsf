@@ -1,18 +1,18 @@
 import React, { useLayoutEffect } from 'react';
-import { useDefaults } from 'src/hooks';
-import { FieldProps, Schema } from 'src/models';
+import { useDefaults } from '../../hooks';
+import { FieldProps, Schema } from '../../models';
 import {
   clone,
   getConditionals,
   getFieldComponent,
   getProperties,
   merge
-} from 'src/utils';
+} from '../../utils';
 
 export function ObjectField(props: FieldProps) {
   const {
     schema,
-    layout,
+    schema: { layout: { order } = {} },
     registry: {
       templates: { ObjectTemplate, PanicTemplate }
     },
@@ -24,13 +24,13 @@ export function ObjectField(props: FieldProps) {
 
   useDefaults(props);
 
-  const { order } = layout ?? {};
   const properties = getProperties(schema) ?? {};
   const conditionals = getConditionals(schema, value) ?? {};
   const availables = { ...properties, ...conditionals };
 
   const availableKeys = new Set(Object.keys(availables));
-  const keys = (order ?? [])
+  const keys = (Array.isArray(order) ? order : [])
+    .map(v => v?.toString() ?? '')
     .reduce((prev, curr) => {
       if (availableKeys.has(curr)) {
         prev.push(curr);
@@ -63,15 +63,12 @@ export function ObjectField(props: FieldProps) {
         const sub = {
           key,
           ...props,
-          // Forcing a cast here but checking after.
           schema: availables?.[key] as Schema,
-          layout: layout?.properties?.[key],
           value: value?.[key],
           validity: validity?.properties?.[key],
           onValue: v => {
             onValue?.(
               merge(clone(value), { [key]: v }, (a, b) =>
-                // cancel concat array values
                 Array.isArray(a) ? b : undefined
               )
             );

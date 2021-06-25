@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction } from 'react';
 import { FormManagerOptions } from './FormManagerOptions';
 import { Validity } from './Validity';
 
-// tslint:disable:member-ordering
 export interface FormManager<T = any> {
   options: FormManagerOptions<T>;
 
@@ -19,4 +18,3 @@ export interface FormManager<T = any> {
   submit: () => Promise<T>;
   validate: (value: T) => Promise<boolean>;
 }
-// tslint:enable:member-ordering

@@ -1,19 +1,18 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import { Form } from 'src/components';
+import { Form } from 'src';
 import { formStoryParameters, useStoryFormProps } from 'storybook/utils';
 
 const meta: Meta = {
-  title: 'Examples',
+  title: 'General/Form',
   ...formStoryParameters
 };
 
 export default meta;
 
-export const Basic = props => {
+export const Basics = props => {
   const formProps = useStoryFormProps({
     ...props,
-    onSubmit: values => console.log(values),
     schema: {
       type: 'object',
       title: 'Form',
@@ -51,4 +50,35 @@ export const Basic = props => {
     }
   });
   return <Form {...formProps} />;
+};
+
+export const Sandbox = props => {
+  const { schema, ...rest } = props ?? {};
+  const formProps = useStoryFormProps({
+    schema: schema || {
+      type: 'null',
+      title: 'Invalid JSON'
+    },
+    ...rest
+  });
+  return <Form {...formProps} />;
+};
+Sandbox.args = {
+  schema: {
+    type: 'object',
+    title: 'Please, login',
+    properties: {
+      username: {
+        title: 'Username',
+        type: 'string'
+      },
+      password: {
+        title: 'Password',
+        type: 'string',
+        minLength: 8
+      }
+    },
+    required: ['username', 'password']
+  },
+  initialValue: {}
 };
