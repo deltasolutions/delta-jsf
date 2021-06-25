@@ -18,10 +18,10 @@ jobs:
         run: npm ci
 
       - name: Build Docs
-        run: npm run build:storybook
+        run: npm run build:docs
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
-          folder: storybook-static
+          folder: build/docs
