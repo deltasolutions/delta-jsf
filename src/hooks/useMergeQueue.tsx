@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
-import { MergeFunction } from 'src/models';
-import { clone, flatPromise, merge } from 'src/utils';
+import { MergeFunction } from '../models';
+import { clone, flatPromise, merge } from '../utils';
 
 export const useMergeQueue = <T extends unknown>(
   initialValue: T,

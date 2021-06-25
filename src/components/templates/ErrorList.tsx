@@ -1,5 +1,5 @@
 import React from 'react';
-import { Validity } from 'src/models';
+import { Validity } from '../../models';
 
 export interface ErrorListProps {
   validity?: Validity;

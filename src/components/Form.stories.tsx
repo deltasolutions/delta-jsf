@@ -1,16 +1,16 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import { Form } from 'src/components';
+import { Form } from 'src';
 import { formStoryParameters, useStoryFormProps } from 'storybook/utils';
 
 const meta: Meta = {
-  title: 'Examples',
+  title: 'General/Form',
   ...formStoryParameters
 };
 
 export default meta;
 
-export const Basic = props => {
+export const Basics = props => {
   const formProps = useStoryFormProps({
     ...props,
     onSubmit: values => console.log(values),

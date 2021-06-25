@@ -1,6 +1,7 @@
 import Ajv from 'ajv';
-import { Schema, Validity } from 'src/models';
-import { get, set } from 'src/utils';
+import { Schema, Validity } from '../models';
+import { get } from './get';
+import { set } from './set';
 
 const ajv = new Ajv();
 

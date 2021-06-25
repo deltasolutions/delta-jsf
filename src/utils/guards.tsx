@@ -1,4 +1,4 @@
-import { FormProps, ManagedFormProps } from 'src/models';
+import { FormProps, ManagedFormProps } from '../models';
 
 export const isObject = (v): v is object => typeof v === 'object' && v;
 

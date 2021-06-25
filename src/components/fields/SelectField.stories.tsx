@@ -10,7 +10,7 @@ const meta: Meta = {
 
 export default meta;
 
-export const Basic = props => {
+export const Basics = props => {
   const fieldProps = useStoryFieldProps(props);
   return (
     <SelectField
@@ -27,11 +27,10 @@ export const Basic = props => {
           {
             const: '3'
           }
-        ]
-      }}
-      layout={{
-        options: {
-          placeholder: 'select an option'
+        ],
+        layout: {
+          field: 'select',
+          placeholder: 'Select an option'
         }
       }}
       {...fieldProps}
@@ -56,7 +55,8 @@ export const Filled = props => {
           {
             const: '3'
           }
-        ]
+        ],
+        layout: { field: 'select' }
       }}
       {...fieldProps}
     />

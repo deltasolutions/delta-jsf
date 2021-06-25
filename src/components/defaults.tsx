@@ -1,14 +1,12 @@
-import { validateAgainstSchema } from './validateAgainstSchema';
+import { validateAgainstSchema } from '../utils';
 import {
-  createFieldTemplate,
   ArrayField,
-  ArrayTemplate,
   InputField,
   NullField,
   ObjectField,
-  PanicTemplate,
   SelectField
-} from 'src/components';
+} from './fields';
+import { ArrayTemplate, PanicTemplate, createFieldTemplate } from './templates';
 
 export const defaults = {
   registry: {

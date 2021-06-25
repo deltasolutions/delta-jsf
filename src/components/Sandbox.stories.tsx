@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import React from 'react';
-import { Form } from '../Form';
+import { Form } from 'src';
 import { formStoryParameters, useStoryFormProps } from 'storybook/utils';
 
 const meta: Meta = {
@@ -33,37 +33,37 @@ Basic.args = {
   layout: {
     properties: {
       serviceType: {
-        field: 'fan_control'
+        field: 'fanControl'
       }
     }
   },
   schema: {
     $defs: {
-      complex_config: {
+      complexConfig: {
         description: 'Complex fan control configuration',
         properties: {
-          fan_control_loops: {
+          fanControlLoops: {
             description: 'List of fan [desired rpm] -> [pwm] controllers',
             items: {
-              $ref: '#/$defs/fan_control_loop'
+              $ref: '#/$defs/fanControlLoop'
             },
             type: 'array'
           },
-          thermal_control_loops: {
+          thermalControlLoops: {
             description:
               'List of [temperature] -> [desired fan rpm] controllers',
             items: {
-              $ref: '#/$defs/thermal_control_loop'
+              $ref: '#/$defs/thermalControlLoop'
             },
             type: 'array'
           }
         },
-        required: ['fan_control_loops', 'thermal_control_loops'],
+        required: ['fanControlLoops', 'thermalControlLoops'],
         type: 'object'
       },
-      fan_control_loop: {
+      fanControlLoop: {
         properties: {
-          fan_name: {
+          fanName: {
             description:
               'The name of the controlled fan as returned by EntityManager',
             type: 'string'
@@ -72,16 +72,16 @@ Basic.args = {
             type: 'object',
             allOf: [
               {
-                $ref: '#/$defs/pid_coefficient_set'
+                $ref: '#/$defs/pidCoefficientSet'
               },
               {
                 type: 'object',
                 properties: {
-                  output_limits_max: {
+                  outputLimitsMax: {
                     maximum: 100,
                     minimum: 0
                   },
-                  output_limits_min: {
+                  outputLimitsMin: {
                     maximum: 100,
                     minimum: 0
                   }
@@ -90,86 +90,86 @@ Basic.args = {
             ]
           }
         },
-        required: ['fan_name', 'pid'],
+        required: ['fanName', 'pid'],
         type: 'object'
       },
-      pid_coefficient_set: {
+      pidCoefficientSet: {
         description: 'Coefficients of a PID controller',
         properties: {
-          correction_speed_limits_max: {
+          correctionSpeedLimitsMax: {
             description:
               'Upper bound of the correction speed [output units / sec]',
             type: 'number'
           },
-          correction_speed_limits_min: {
+          correctionSpeedLimitsMin: {
             description:
               'Lower bound of the correction speed [output units / sec]',
             type: 'number'
           },
-          derivative_coeff: {
+          derivativeCoeff: {
             description: 'Derivative coefficient [unitless]',
             type: 'number'
           },
-          integral_coeff: {
+          integralCoeff: {
             description: 'Integral coefficient [unitless]',
             type: 'number'
           },
-          integral_limits_max: {
+          integralLimitsMax: {
             description:
               'Upper bound of the integral term [output units * sec]',
             type: 'number'
           },
-          integral_limits_min: {
+          integralLimitsMin: {
             description:
               'Lower bound of the integral term [output units * sec]',
             type: 'number'
           },
-          output_limits_max: {
+          outputLimitsMax: {
             description: 'Maximal meaningful output value [output units]',
             type: 'number'
           },
-          output_limits_min: {
+          outputLimitsMin: {
             description: 'Minimal meaningful output value [output units]',
             type: 'number'
           },
-          proportional_coeff: {
+          proportionalCoeff: {
             description: 'Proportional coefficient [unitless]',
             type: 'number'
           }
         },
         required: [
-          'output_limits_min',
-          'output_limits_max',
-          'integral_limits_min',
-          'integral_limits_max'
+          'outputLimitsMin',
+          'outputLimitsMax',
+          'integralLimitsMin',
+          'integralLimitsMax'
         ],
         type: 'object'
       },
-      simple_config: {
+      simpleConfig: {
         description: 'Simple fan control configuration',
         properties: {
           table: {
-            $ref: '#/$defs/stepwise_table'
+            $ref: '#/$defs/stepwiseTable'
           }
         },
         required: ['table'],
         type: 'object'
       },
-      stepwise_table: {
+      stepwiseTable: {
         description: 'A table directly mapping input values to output values',
         properties: {
-          table_data: {
+          tableData: {
             items: {
-              $ref: '#/$defs/stepwise_table_entry'
+              $ref: '#/$defs/stepwiseTableEntry'
             },
             minItems: 1,
             type: 'array'
           }
         },
-        required: ['table_data'],
+        required: ['tableData'],
         type: 'object'
       },
-      stepwise_table_entry: {
+      stepwiseTableEntry: {
         properties: {
           output: {
             description: 'Output value',
@@ -183,11 +183,11 @@ Basic.args = {
         required: ['reading', 'output'],
         type: 'object'
       },
-      thermal_control_loop: {
+      thermalControlLoop: {
         else: {
           properties: {
             data: {
-              $ref: '#/$defs/stepwise_table'
+              $ref: '#/$defs/stepwiseTable'
             }
           }
         },
@@ -225,7 +225,7 @@ Basic.args = {
         then: {
           properties: {
             data: {
-              $ref: '#/$defs/pid_coefficient_set'
+              $ref: '#/$defs/pidCoefficientSet'
             },
             setpoint: {
               description: 'Target output level',
@@ -241,7 +241,7 @@ Basic.args = {
     else: {
       properties: {
         config: {
-          $ref: '#/$defs/complex_config'
+          $ref: '#/$defs/complexConfig'
         }
       }
     },
@@ -262,7 +262,7 @@ Basic.args = {
     then: {
       properties: {
         config: {
-          $ref: '#/$defs/simple_config'
+          $ref: '#/$defs/simpleConfig'
         }
       }
     },

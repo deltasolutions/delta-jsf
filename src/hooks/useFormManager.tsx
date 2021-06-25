@@ -1,17 +1,17 @@
 import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import { defaults } from '../components/defaults';
+import { Validity } from '../models';
+import { FormManager, FormManagerOptions } from '../models';
+import { clone, merge } from '../utils';
 import { useDereferencedSchema } from './useDereferencedSchema';
 import { useMergeQueue } from './useMergeQueue';
-import { defaults } from 'src/defaults';
-import { Validity } from 'src/models';
-import { FormManager, FormManagerOptions } from 'src/models';
-import { clone, merge } from 'src/utils';
 
 export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
   options: TOptions
 ): TOptions extends { initialValue: T }
   ? FormManager<T>
   : FormManager<T | undefined> => {
-  const derefOptions = useDereferencedSchema(options);
+  const dereferencedOptions = useDereferencedSchema(options);
   const {
     schema,
     initialValue,
@@ -19,7 +19,7 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
     onValidity,
     onSubmit,
     registry = defaults.registry
-  } = derefOptions;
+  } = dereferencedOptions;
 
   const {
     utils: { validateAgainstSchema }
@@ -77,16 +77,13 @@ export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
   }, [validity]);
 
   return {
-    options: derefOptions,
-
+    options: dereferencedOptions,
     value,
     setValue,
     validity,
     extendValidity,
-
     isValid,
     isSubmitted,
-
     wait,
     submit,
     validate

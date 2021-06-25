@@ -5,6 +5,7 @@ import { task, dest, src, series, watch } from 'gulp';
 import ts from 'gulp-typescript';
 import * as rollup from 'rollup';
 import rollupConfig from './rollup.config.js';
+import { compilerOptions as typescriptConfig } from './tsconfig.json';
 
 const execaOptions = { stdout: 'inherit' };
 
@@ -20,10 +21,10 @@ task('build:lib:js', async () => {
 });
 
 task('build:lib:types', () => {
-  return src('./src/**/*.tsx')
+  return src(['./src/**/*.tsx', '!./src/**/*.stories.*', '!./src/**/*.test.*'])
     .pipe(
       ts({
-        ...require('./tsconfig.json').compilerOptions,
+        ...typescriptConfig,
         declaration: true,
         declarationMap: true,
         emitDeclarationOnly: true

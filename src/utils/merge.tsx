@@ -1,5 +1,5 @@
+import { MergeFunction } from '../models';
 import { isObject } from './guards';
-import { MergeFunction } from 'src/models';
 
 const mergeTwoObjects = (target: any, source: any, fn?: MergeFunction) => {
   Object.keys(source).forEach((key: string) => {

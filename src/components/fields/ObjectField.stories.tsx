@@ -21,17 +21,16 @@ export const Basic = props => {
           a: {
             title: 'AAA',
             type: 'string',
-            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }]
+            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }],
+            layout: {
+              field: 'select',
+              placeholder: 'Select an option'
+            }
           },
           b: {
             title: 'BBB',
             type: 'string'
           }
-        }
-      }}
-      layout={{
-        properties: {
-          a: { field: 'select', options: { placeholder: 'select an option' } }
         }
       }}
       {...fieldProps}
@@ -54,7 +53,8 @@ export const Filled = props => {
           a: {
             title: 'AAA',
             type: 'string',
-            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }]
+            oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }],
+            layout: { field: 'select' }
           },
           b: {
             title: 'BBB',
@@ -65,11 +65,6 @@ export const Filled = props => {
             type: 'array',
             items: { type: 'string' }
           }
-        }
-      }}
-      layout={{
-        properties: {
-          a: { field: 'select' }
         }
       }}
       {...fieldProps}

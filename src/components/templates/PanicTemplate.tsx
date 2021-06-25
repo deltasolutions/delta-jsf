@@ -1,5 +1,5 @@
 import React from 'react';
-import { TemplateProps } from 'src/models';
+import { TemplateProps } from '../../models';
 
 export function PanicTemplate({ schema, children }: TemplateProps) {
   return (

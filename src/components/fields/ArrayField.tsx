@@ -1,12 +1,13 @@
 import React from 'react';
-import { useDefaults } from 'src/hooks';
-import { FieldProps, Schema } from 'src/models';
-import { clone, getFieldComponent, merge } from 'src/utils';
+import { useDefaults } from '../../hooks';
+import { FieldProps, Schema } from '../../models';
+import { clone, getFieldComponent, merge } from '../../utils';
 
 export function ArrayField(props: FieldProps) {
+  useDefaults(props);
+
   const {
-    schema,
-    layout,
+    schema: { items },
     registry: {
       templates: { ArrayTemplate, PanicTemplate }
     },
@@ -16,14 +17,10 @@ export function ArrayField(props: FieldProps) {
     onValidity
   } = props;
 
-  const { items } = schema ?? {};
-
-  useDefaults(props);
-
   if (Array.isArray(items)) {
     return (
       <PanicTemplate {...props}>
-        Incorrect value in 'schema.items' — must be a object.
+        Incorrect value in 'schema.items' — must be an object.
       </PanicTemplate>
     );
   }
@@ -36,7 +33,6 @@ export function ArrayField(props: FieldProps) {
         const sub: FieldProps<any> = {
           ...props,
           schema: (items ?? {}) as Schema,
-          layout: layout?.items,
           value,
           onValue: v => {
             const copy = [...values];

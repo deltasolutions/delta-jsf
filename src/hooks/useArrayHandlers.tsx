@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { Schema, TemplateProps } from 'src/models';
+import { Schema, TemplateProps } from '../models';
 
 export const useArrayHandlers = (props: TemplateProps) => {
   const {
@@ -8,10 +8,10 @@ export const useArrayHandlers = (props: TemplateProps) => {
     schema: { maxItems, minItems, additionalItems } = {} as Schema
   } = props ?? {};
 
-  const mayDelete = useMemo(() => (value?.length ?? 0) > (minItems ?? 0), [
-    value,
-    minItems
-  ]);
+  const mayDelete = useMemo(
+    () => (value?.length ?? 0) > (minItems ?? 0),
+    [value, minItems]
+  );
 
   const handleDelete = useCallback(
     (itemIdex: number): void =>

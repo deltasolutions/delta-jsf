@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import { FormHTMLAttributes, ReactNode } from 'react';
 import { FormManager } from './FormManager';
 import { FormManagerOptions } from './FormManagerOptions';
 
 export interface NativeFormProps
   extends Pick<
-    React.FormHTMLAttributes<HTMLFormElement>,
+    FormHTMLAttributes<HTMLFormElement>,
     'style' | 'className' | 'id'
   > {
   children?: ReactNode | ReactNode[];

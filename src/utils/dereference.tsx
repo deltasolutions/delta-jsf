@@ -1,7 +1,10 @@
+import { Schema } from '../models';
 import { get } from './get';
-import { Schema } from 'src/models';
 
-export const dereference = (schema: Schema, root?: Schema): Schema =>
+export const dereference = async (
+  schema: Schema,
+  root?: Schema
+): Promise<Schema> =>
   Object.entries(schema).reduce((acc, [key, value]) => {
     if (key === '$ref' && typeof value === 'string' && value.startsWith('#')) {
       const { $ref, ...rest } = acc;
