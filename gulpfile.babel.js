@@ -36,14 +36,6 @@ task('build:lib:types', () => {
 
 task('build:lib', series('clean', 'build:lib:js', 'build:lib:types'));
 
-task('start:lib', () => {
-  watch(
-    ['src/**/*'],
-    { ignoreInitial: false },
-    series('build:lib:js', 'build:lib:types')
-  );
-});
-
 task('build:docs:js', async () => {
   await execa.command(
     'build-storybook -c storybook -o build/docs',
@@ -53,7 +45,7 @@ task('build:docs:js', async () => {
 
 task('build:docs', series('clean', 'build:docs:js'));
 
-task('start:docs', async () => {
+task('dev:docs', async () => {
   await execa.command(
     'start-storybook -c storybook -p 6006 --ci',
     execaOptions
