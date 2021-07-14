@@ -95,7 +95,7 @@ task('release:git', async () => {
   await execa.command(`git commit -am ${target}`, execaOptions);
   await execa.command(`git tag v${target}`, execaOptions);
   await execa.command(`git push origin master`, execaOptions);
-  await execa.command(`git push origin ${target}`, execaOptions);
+  await execa.command(`git push origin v${target}`, execaOptions);
 });
 
 task('release:npm', async () => {
