@@ -3,7 +3,7 @@ import { Schema, Validity } from '../models';
 import { get } from './get';
 import { set } from './set';
 
-const ajv = new Ajv();
+const ajv = new Ajv({ keywords: ['layout'] });
 
 export const validateAgainstSchema = (schema: Schema, value: any): Validity => {
   const validateViaAjv = ajv.compile(schema);

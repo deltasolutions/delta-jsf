@@ -41,7 +41,11 @@ export const Basics = props => {
             properties: {
               b: {
                 type: 'string',
-                title: 'BBB'
+                title: 'BBB',
+                oneOf: [{ const: '1' }, { const: '2' }, { const: '3' }],
+                layout: {
+                  field: 'select'
+                }
               }
             }
           }

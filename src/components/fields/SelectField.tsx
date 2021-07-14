@@ -22,9 +22,16 @@ export function SelectField(props: FieldProps) {
     );
   }
 
-  if (!oneOf) {
+  if (
+    !oneOf ||
+    !oneOf.every(
+      v => typeof v === 'object' && typeof (v.title ?? v.const) === 'string'
+    )
+  ) {
     return (
-      <PanicTemplate {...props}>Select field: oneOf must be used</PanicTemplate>
+      <PanicTemplate {...props}>
+        Select field: invalid "oneOf" schema
+      </PanicTemplate>
     );
   }
 
@@ -40,30 +47,16 @@ export function SelectField(props: FieldProps) {
           onValue?.(v);
         }}
       >
-        <option hidden disabled value="">
-          {placeholder ?? ''}
-        </option>
-        {oneOf.map(v => {
-          if (typeof v !== 'object') {
-            return (
-              <PanicTemplate {...props}>
-                Select field: oneOf[i] must be object
-              </PanicTemplate>
-            );
-          }
-          if (typeof v.const !== 'string') {
-            return (
-              <PanicTemplate {...props}>
-                Select field: oneOf[i].const must be string
-              </PanicTemplate>
-            );
-          }
-          return (
-            <option key={v.const} value={v.const}>
-              {v.title ?? v.const}
-            </option>
-          );
-        })}
+        {typeof placeholder === 'string' && (
+          <option hidden disabled value="">
+            {placeholder ?? ''}
+          </option>
+        )}
+        {oneOf.map((v: { const: string; title?: string }) => (
+          <option key={v.const} value={v.const}>
+            {v.title ?? v.const}
+          </option>
+        ))}
       </select>
     </PrimitiveTemplate>
   );
