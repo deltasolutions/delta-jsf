@@ -2,11 +2,11 @@ import { Registry } from './Registry';
 import { Schema } from './Schema';
 import { Validity } from './Validity';
 
-export interface FieldProps<TFieldValue = any> {
+export interface FieldProps<FieldValue = any> {
   schema: Schema;
   registry: Registry;
-  value?: TFieldValue;
+  value?: FieldValue;
   validity?: Validity;
-  onValue?: (value: TFieldValue | Promise<TFieldValue>) => void;
+  onValue?: (value: FieldValue | Promise<FieldValue>) => void;
   onValidity?: (validity: Validity | Promise<Validity>) => void;
 }

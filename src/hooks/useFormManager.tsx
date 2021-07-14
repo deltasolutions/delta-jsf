@@ -6,9 +6,12 @@ import { clone, merge } from '../utils';
 import { useDereferencedOptions } from './useDereferencedOptions';
 import { useMergeQueue } from './useMergeQueue';
 
-export const useFormManager = <T, TOptions extends FormManagerOptions<T>>(
-  options: TOptions
-): TOptions extends { initialValue: T }
+export const useFormManager = <
+  T extends unknown,
+  Options extends FormManagerOptions<T> = FormManagerOptions<T>
+>(
+  options: Options
+): Options extends { initialValue: T }
   ? FormManager<T>
   : FormManager<T | undefined> => {
   const dereferencedOptions = useDereferencedOptions(options);
