@@ -56,6 +56,27 @@ export const Basics = props => {
   return <Form {...formProps} />;
 };
 
+export const Collections = props => {
+  const formProps = useStoryFormProps({
+    ...props,
+    schema: {
+      type: 'array',
+      title: 'Collection',
+      items: {
+        type: 'object',
+        properties: {
+          name: {
+            title: 'Name',
+            type: 'string'
+          }
+        },
+        required: ['name']
+      }
+    }
+  });
+  return <Form {...formProps} />;
+};
+
 export const Sandbox = props => {
   const { schema, ...rest } = props ?? {};
   const formProps = useStoryFormProps({

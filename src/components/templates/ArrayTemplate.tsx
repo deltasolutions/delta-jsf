@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useArrayHandlers } from '../../hooks';
 import { TemplateProps } from '../../models';
 import { ErrorList } from './ErrorList';
@@ -13,15 +13,12 @@ export function ArrayTemplate(props: TemplateProps) {
       <div className="content">
         {Array.isArray(children)
           ? [...children]?.map((child, index) => (
-              <Fragment key={`array-wrap-${index}`}>
-                <div className="item">
-                  {child}
-                  {handleDelete && (
-                    <button onClick={() => handleDelete(index)}>Delete</button>
-                  )}
-                </div>
-                <ErrorList validity={validity?.items?.[index]} />
-              </Fragment>
+              <div key={`array-item-${index}`} className="item">
+                {child}
+                {handleDelete && (
+                  <button onClick={() => handleDelete(index)}>Delete</button>
+                )}
+              </div>
             ))
           : children}
         <ErrorList validity={validity} />
