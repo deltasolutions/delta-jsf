@@ -64,7 +64,7 @@ export const useFormManager = <
   // to be used either in `onValue` or in `onSubmit`.
   const validate = useCallback(
     (value: T) => {
-      const validity = validateAgainstSchema(schema, value);
+      const validity = validateAgainstSchema({ schema, value });
       setSchemaValidity(validity);
     },
     [schema]

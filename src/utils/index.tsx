@@ -9,4 +9,4 @@ export * from './guards';
 export * from './hash';
 export * from './merge';
 export * from './set';
-export * from './validateAgainstSchema';
+export * from './validateAgainstSchemaViaAjv';

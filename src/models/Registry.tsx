@@ -1,14 +1,13 @@
 import { ComponentType } from 'react';
 import { FieldProps } from './FieldProps';
-import { Schema } from './Schema';
 import { TemplateProps } from './TemplateProps';
-import { Validity } from './Validity';
+import { ValidateAgainstSchemaFunction } from './ValidateAgainstSchemaFunction';
 
 export interface Registry {
   fields: { [key: string]: ComponentType<FieldProps> };
   templates: { [key: string]: ComponentType<TemplateProps> };
   utils: {
-    validateAgainstSchema: (schema: Schema, value: any) => Validity;
+    validateAgainstSchema: ValidateAgainstSchemaFunction;
     [key: string]: (...args: any) => any;
   };
 }

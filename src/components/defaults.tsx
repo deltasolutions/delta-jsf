@@ -1,4 +1,4 @@
-import { validateAgainstSchema } from '../utils';
+import { validateAgainstSchemaViaAjv } from '../utils';
 import {
   ArrayField,
   InputField,
@@ -26,7 +26,7 @@ export const defaults = {
       ObjectTemplate: createFieldTemplate('djsf-object')
     },
     utils: {
-      validateAgainstSchema
+      validateAgainstSchema: validateAgainstSchemaViaAjv
     }
   }
 };
