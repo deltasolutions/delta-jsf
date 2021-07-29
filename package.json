@@ -1,6 +1,6 @@
 {
   "name": "delta-jsf",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "homepage": "https://deltasolutions.github.io/delta-jsf/",
   "repository": {
     "type": "git",
@@ -52,7 +52,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
-    "ajv": "^7.2.4",
+    "ajv": "^8.6.2",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
     "env-cmd": "^10.1.0",
@@ -80,7 +80,7 @@
     "yargs": "^15.4.1"
   },
   "peerDependencies": {
-    "ajv": "^7 || ^8",
+    "ajv": "^8",
     "react": "^16 || ^17",
     "react-dom": "^16 || ^17"
   }

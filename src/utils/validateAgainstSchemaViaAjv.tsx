@@ -23,7 +23,7 @@ export const validateAgainstSchemaViaAjv = ({
     [];
   const validity =
     ajvErrors.reduce((prev, curr) => {
-      const path = curr.dataPath
+      const path = curr.instancePath
         .replace(/\/(\D)/g, '/properties/$1')
         .replace(/\/(\d)/g, '/items/$1')
         .split('/')
