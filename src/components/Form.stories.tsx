@@ -77,6 +77,33 @@ export const Collections = props => {
   return <Form {...formProps} />;
 };
 
+export const HiddenField = props => {
+  const formProps = useStoryFormProps({
+    ...props,
+    schema: {
+      type: 'object',
+      properties: {
+        name: {
+          title: 'Name',
+          type: 'string'
+        },
+        surname: {
+          title: 'Surname',
+          type: 'string',
+          layout: {
+            field: 'hidden'
+          }
+        }
+      }
+    },
+    initialValue: {
+      name: 'Lorem',
+      surname: 'Ipsum'
+    }
+  });
+  return <Form {...formProps} />;
+};
+
 export const Sandbox = props => {
   const { schema, ...rest } = props ?? {};
   const formProps = useStoryFormProps({

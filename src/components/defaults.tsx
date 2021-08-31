@@ -17,7 +17,8 @@ export const defaults = {
       select: SelectField,
       object: ObjectField,
       array: ArrayField,
-      null: NullField
+      null: NullField,
+      hidden: NullField
     },
     templates: {
       PanicTemplate,
